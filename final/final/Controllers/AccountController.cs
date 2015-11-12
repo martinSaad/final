@@ -186,7 +186,7 @@ namespace final.Controllers
             user[userModel.IS_CLIENT] = true;
 
             await user.SignUpAsync();
-            return View(model);
+            return RedirectToAction("Index", "Home");
         }
 
         //
