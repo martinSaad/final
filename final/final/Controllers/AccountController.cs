@@ -69,26 +69,40 @@ namespace final.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            /*  if (!ModelState.IsValid)
+              {
+                  return View(model);
+              }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+              // This doesn't count login failures towards account lockout
+              // To enable password failures to trigger account lockout, change to shouldLockout: true
+              var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+              switch (result)
+              {
+                  case SignInStatus.Success:
+                      return RedirectToLocal(returnUrl);
+                  case SignInStatus.LockedOut:
+                      return View("Lockout");
+                  case SignInStatus.RequiresVerification:
+                      return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                  case SignInStatus.Failure:
+                  default:
+                      ModelState.AddModelError("", "Invalid login attempt.");
+                      return View(model);
+              }
+              */
+
+            try
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                await ParseUser.LogInAsync(model.Email, model.Password);
+                return RedirectToLocal(returnUrl);
+                // Login was successful.
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("login exception. original error: " + e);
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
             }
         }
 
@@ -184,6 +198,7 @@ namespace final.Controllers
             user[userModel.FIRST_NAME] = model.firstName;
             user[userModel.LAST_NAME] = model.lastName;
             user[userModel.IS_CLIENT] = true;
+            user[userModel.IS_BUSINESS] = false;
 
             await user.SignUpAsync();
             return RedirectToAction("Index", "Home");
