@@ -193,12 +193,10 @@ namespace final.Controllers
                 Email = model.Email
             };
 
-            User userModel = new User();
-
-            user[userModel.FIRST_NAME] = model.firstName;
-            user[userModel.LAST_NAME] = model.lastName;
-            user[userModel.IS_CLIENT] = true;
-            user[userModel.IS_BUSINESS] = false;
+            user[Models.Constants.FIRST_NAME] = model.firstName;
+            user[Models.Constants.LAST_NAME] = model.lastName;
+            user[Models.Constants.IS_CLIENT] = true;
+            user[Models.Constants.IS_BUSINESS] = false;
 
             await user.SignUpAsync();
             return RedirectToAction("Index", "Home");

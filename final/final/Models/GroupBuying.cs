@@ -9,7 +9,6 @@ namespace final.Models
     {
         public Bid bid { get; set; }
         public string productID { get; set; }
-        public User user { get; set; }
 
 
         public string BID = "bid";
