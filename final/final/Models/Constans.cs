@@ -14,6 +14,6 @@ namespace final.Models
         public const string LAST_NAME = "lastName";
         public const string EMAIL = "email";
         public const string IS_CLIENT = "isClient";
-        public const string IS_BUSINESS = "isBusinnes";
+        public const string IS_BUSINESS = "isBusiness";
     }
 }

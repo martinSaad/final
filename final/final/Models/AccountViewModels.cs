@@ -65,10 +65,10 @@ namespace final.Models
     public class RegisterViewModel
     {
         [Required]
-        public string firstName { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
-        public string lastName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         [EmailAddress]

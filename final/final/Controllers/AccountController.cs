@@ -69,15 +69,16 @@ namespace final.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            /*  if (!ModelState.IsValid)
+              if (!ModelState.IsValid)
               {
                   return View(model);
               }
 
-              // This doesn't count login failures towards account lockout
-              // To enable password failures to trigger account lockout, change to shouldLockout: true
-              var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-              switch (result)
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            await ParseUser.LogInAsync(model.Email, model.Password);
+            switch (result)
               {
                   case SignInStatus.Success:
                       return RedirectToLocal(returnUrl);
@@ -90,20 +91,7 @@ namespace final.Controllers
                       ModelState.AddModelError("", "Invalid login attempt.");
                       return View(model);
               }
-              */
-
-            try
-            {
-                await ParseUser.LogInAsync(model.Email, model.Password);
-                return RedirectToLocal(returnUrl);
-                // Login was successful.
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("login exception. original error: " + e);
-                ModelState.AddModelError("", "Invalid login attempt.");
-                return View(model);
-            }
+              
         }
 
         //
@@ -164,14 +152,29 @@ namespace final.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            /*if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                //ParseUser registration
+                var parseUser = new ParseUser()
+                {
+                    Username = model.Email,
+                    Password = model.Password,
+                    Email = model.Email
+                };
+                parseUser[Models.Constants.FIRST_NAME] = model.FirstName;
+                parseUser[Models.Constants.LAST_NAME] = model.LastName;
+                parseUser[Models.Constants.IS_CLIENT] = true;
+                parseUser[Models.Constants.IS_BUSINESS] = false;
+
+                await parseUser.SignUpAsync();
+
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -182,24 +185,9 @@ namespace final.Controllers
                 }
                 AddErrors(result);
             }
+            // If we got this far, something failed, redisplay 
+            return View(model);
 
-            // If we got this far, something failed, redisplay form
-            */
-
-            var user = new ParseUser()
-            {
-                Username = model.Email,
-                Password = model.Password,
-                Email = model.Email
-            };
-
-            user[Models.Constants.FIRST_NAME] = model.firstName;
-            user[Models.Constants.LAST_NAME] = model.lastName;
-            user[Models.Constants.IS_CLIENT] = true;
-            user[Models.Constants.IS_BUSINESS] = false;
-
-            await user.SignUpAsync();
-            return RedirectToAction("Index", "Home");
         }
 
         //
