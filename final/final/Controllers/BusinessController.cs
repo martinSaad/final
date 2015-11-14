@@ -1,15 +1,10 @@
-﻿using System;
-using System.Globalization;
+﻿using final.Models;
+using Parse;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using final.Models;
-using Parse;
 
 namespace final.Controllers
 {
@@ -23,6 +18,22 @@ namespace final.Controllers
             return View();
         }
 
-        public ActionResult 
+        //return list of groups - waiting for bid! - that are relevant for this current business
+        public async System.Threading.Tasks.Task<ActionResult> Groups()
+        {
+            var currentUser = ParseUser.CurrentUser;
+
+            var myBusinessQuery = ParseObject.GetQuery("Business").WhereEqualTo("user", currentUser);
+            ParseObject myBusiness = await myBusinessQuery.FirstAsync();
+
+            var myProductsQuery = ParseObject.GetQuery(Models.Constants.PRODUCT_TABLE).WhereEqualTo("business", myBusiness);
+            IEnumerable<ParseObject> myProducts = await myProductsQuery.FindAsync();
+
+
+            var myValidGroupsQuery = ParseObject.GetQuery(Models.Constants.GROUP_BUYING_TABLE).WhereEqualTo("product", myProducts.FirstOrDefault());
+            IEnumerable<ParseObject> myValidGroups = await myValidGroupsQuery.FindAsync();
+
+            return View();
+        }
     }
 }

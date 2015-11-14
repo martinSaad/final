@@ -29,10 +29,5 @@ namespace final.Controllers
             return View();
         }
 
-        //find which businesses can deliver this product and add them to "potential_businesses" column of "Group_Buying"
-        public void addPotentialBusinesses(IEnumerable<ParseObject> product)
-        {
-            //var businesses = ParseObject.GetQuery(Constants.PRODUCT).WhereEqualTo("business", );
-        }
     }
 }

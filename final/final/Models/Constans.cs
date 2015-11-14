@@ -8,7 +8,8 @@ namespace final.Models
     public static class Constants
     {
         public const string OBJECT_ID = "objectId";
-        public const string PRODUCT = "Product";
+        public const string PRODUCT_TABLE = "Product";
+        public const string GROUP_BUYING_TABLE = "Group_Buying";
 
         //user
         public const string USER_NAME = "username";
