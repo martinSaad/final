@@ -7,7 +7,8 @@ namespace final.Models
 {
     public class Bid
     {
-        public string comments;
-        public float price; 
+        public string comments { get; set; }
+        public float price { get; set; }
+        public string groupBuyingId { get; set; }
     }
 }

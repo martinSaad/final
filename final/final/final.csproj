@@ -251,7 +251,9 @@
     <Content Include="Views\Group\CreateGroup.cshtml" />
     <Content Include="Views\Business\Login.cshtml" />
     <Content Include="Views\Business\Dashboard.cshtml" />
-    <Content Include="Views\Business\Groups.cshtml" />
+    <Content Include="Views\Business\GroupsWithMyProducts.cshtml" />
+    <Content Include="Views\Group\CreateBid.cshtml" />
+    <Content Include="Views\Business\MyActiveGroups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
