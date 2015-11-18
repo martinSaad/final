@@ -71,7 +71,7 @@ namespace final.Controllers
             return View();
         }
 
-
+        //return a list of groups that the current business "won".
         public async System.Threading.Tasks.Task<ActionResult> MyActiveGroups()
         {
             //extracting current businessId
