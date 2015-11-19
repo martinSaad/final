@@ -7,7 +7,9 @@ namespace final.Models
 {
     public class Product
     {
+        public string productID { get; set; }
         public string title;
         public string subtitle;
     }
 }
+

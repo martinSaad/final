@@ -16,6 +16,9 @@ namespace final.Models
         public const string BID_TABLE = "Bid";
         public const string BUSINESS_TABLE = "Business";
         public const string WINNING_BID_TABLE = "WinningBid";
+        public const string Category = "Categories";
+
+
 
         //group buying
         public const string EXPIRATION_DATE = "expiration_date";

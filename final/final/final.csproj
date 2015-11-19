@@ -185,6 +185,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bid.cs" />
+    <Compile Include="Models\Business.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Constans.cs" />
     <Compile Include="Models\GroupBuying.cs" />
     <Compile Include="Models\IdentityModels.cs" />
