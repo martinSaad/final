@@ -28,7 +28,18 @@ namespace final.Models
                 Product product = new Product();
                 product.objectId = p.ObjectId;
                 product.title = p.Get<string>(Constants.TITLE);
+                product.image = p.Get<string>(Constants.IMAGE);
+
+                Manufacturer manu = new Manufacturer();
+                List<ParseObject> manufacturer = new List<ParseObject>();
+                manufacturer.Add(p.Get<ParseObject>(Constants.MANUFACTURER_ID));
+                product.manufacturer = (Manufacturer)manu.convert(manufacturer);
                 products.Add(product);
+
+                Business bus = new Business();
+                List<ParseObject> business = new List<ParseObject>();
+                business.Add(p.Get<ParseObject>(Constants.BUSINESS));
+                product.businesses = (List<Business>)bus.convert(business);
             }
             return products;
             throw new NotImplementedException();

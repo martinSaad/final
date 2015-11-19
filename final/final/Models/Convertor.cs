@@ -9,6 +9,6 @@ namespace final.Models
 {
     interface Convertor
     {
-        IEnumerable<Object> convert(IEnumerable<ParseObject> objects);
+        IEnumerable<object> convert(IEnumerable<ParseObject> objects);
     }
 }

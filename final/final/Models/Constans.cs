@@ -25,6 +25,8 @@ namespace final.Models
         public const string EXPIRATION_DATE = "expiration_date";
         public const string USERS = "users";
         public const string PRODUCT = "product";
+        public const string BIDS = "bids";
+        public const string GROUP_MANAGER = "group_manager";
 
 
         //user
@@ -34,6 +36,7 @@ namespace final.Models
         public const string EMAIL = "email";
         public const string IS_CLIENT = "isClient";
         public const string IS_BUSINESS = "isBusiness";
+        public const string GROUPS = "groups";
 
         //business
         public const string NAME = "name";
@@ -41,6 +44,9 @@ namespace final.Models
         public const string WEBSITE = "website";
         public const string FACEBOOK_PAGE = "facebookPage";
         public const string PHONE_NUMBER = "phoneNumber";
+        public const string LOGO = "logo";
+        public const string USER = "user";
+        public const string PRODUCTS = "products";
 
         //bid
         public const string PRICE = "price";
@@ -53,8 +59,20 @@ namespace final.Models
         public const string CELLPHONE_ID = "cellphone_id";
         public const string MANUFACTURER_ID = "manufacturer_id";
         public const string BUSINESS = "business";
+        public const string IMAGE = "image";
 
         //winnig Bid
         public const string BID_ID = "bid_id";
+
+        //product cellphone
+        public const string SCREEN_SIZE = "screen_size";
+        public const string CAMERA = "camera";
+        public const string STORAGE_CAPACITY = "storage_capacity";
+        public const string OPERATING_SYSTEM = "operating_system";
+
+        //product type
+        public const string TYPE = "type";
+        public const string PRODUCT_CELLPHONE = "product_cellphone";
+        public const string PRODUCT_TELEVISION = "product_television";
     }
 }

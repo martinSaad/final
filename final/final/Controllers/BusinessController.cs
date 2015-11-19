@@ -44,8 +44,16 @@ namespace final.Controllers
                     if (diff.Hours >=0 && diff.Minutes>=0 && diff.Seconds >= 0)
                     {
                         myGroups.Add(group);
-                    }
+                    }    
                 }
+            }
+
+            List<GroupBuying> groups = new List<GroupBuying>();
+            foreach(ParseObject parseGroup in myGroups)
+            {
+                GroupBuying group = new GroupBuying();
+                group.objectId = parseGroup.ObjectId;
+                group.products = parseGroup.Get<ParseObject>(Constants.PRODUCT);
             }
             return View(myGroups);
         }
