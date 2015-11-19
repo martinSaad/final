@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,14 +10,17 @@ namespace final.Models
 {
     public class CreateGroup
     {
-        public List<Product> products { get; set; }
-        public List<Category> categories { get; set; }
-        public List <SubCategories> subCategories { get; set; }
+        public IEnumerable<object> products { get; set; }
+        public List<ProductCategory> categories { get; set; }
+        public List<SubCategory> subCategories { get; set; }
 
         public CreateGroup()
         {
-            this.products = new List<Product>();
-            
+            this.categories = new List<ProductCategory>();
+            this.subCategories = new List<SubCategory>();
+            this.products = new List<object>();
+
         }
     }
 }
+

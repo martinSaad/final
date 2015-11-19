@@ -16,7 +16,8 @@ namespace final.Models
         public const string BID_TABLE = "Bid";
         public const string BUSINESS_TABLE = "Business";
         public const string WINNING_BID_TABLE = "WinningBid";
-        public const string Category = "Categories";
+        public const string CATEGORY = "Product_Category";
+        public const string SUB_CATEGORY = "Product_Sub_Category";
 
 
 

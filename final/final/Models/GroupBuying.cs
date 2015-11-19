@@ -8,9 +8,11 @@ namespace final.Models
     public class GroupBuying
     {
         public string objectId { get; set; }
-        public Bid bid { get; set; }
+        public List<Bid> bids { get; set; }
         public User groupManager { get; set; }
-        public List<Product> products { get; set; }
+        public List<User> users { get; set; }
+
+        public List<Product> product { get; set; }
         public DateTime groupCreated { get; set; }
         public DateTime expirationDate { get; set; }
         
@@ -18,7 +20,9 @@ namespace final.Models
         public GroupBuying()
         {
             //groupCreated = new DateTime();
-            products = new List<Product>();
+            product = new List<Product>();
+            users = new List<User>();
+            bids = new List<Bid>();
         }
     }
 
