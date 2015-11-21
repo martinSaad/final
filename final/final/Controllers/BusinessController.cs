@@ -53,7 +53,7 @@ namespace final.Controllers
             {
                 GroupBuying group = new GroupBuying();
                 group.objectId = parseGroup.ObjectId;
-                group.products = parseGroup.Get<ParseObject>(Constants.PRODUCT);
+                //group.products = parseGroup.Get<ParseObject>(Constants.PRODUCT);
             }
             return View(myGroups);
         }

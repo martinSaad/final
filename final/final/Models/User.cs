@@ -57,10 +57,10 @@ namespace final.Models
             throw new NotImplementedException();
         }
 
-        public static explicit operator User(IEnumerable<object> v)
+        /*public static explicit operator User(IEnumerable<object> v)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 
 
