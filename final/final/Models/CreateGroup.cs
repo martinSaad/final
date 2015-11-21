@@ -10,15 +10,15 @@ namespace final.Models
 {
     public class CreateGroup
     {
-        public IEnumerable<object> products { get; set; }
-        public List<ProductCategory> categories { get; set; }
-        public List<SubCategory> subCategories { get; set; }
+        public IEnumerable<Product> products { get; set; }
+        public IEnumerable<ProductCategory> categories { get; set; }
+        public IEnumerable<SubCategory> subCategories { get; set; }
 
         public CreateGroup()
         {
             this.categories = new List<ProductCategory>();
             this.subCategories = new List<SubCategory>();
-            this.products = new List<object>();
+            this.products = new List<Product>();
 
         }
     }

@@ -64,7 +64,7 @@ namespace final.Controllers
             bidObject[Constants.COMMENTS] = bid.comments;
             
             //TODO: groupBuyingId is passeed from previous page (Groups)
-            bidObject[Constants.GROUP_BUYING_ID] = bid.groupBuyingId;
+            //bidObject[Constants.GROUP_BUYING_ID] = bid.groupBuyingId;
             bidObject[Constants.BUSINESS_ID] = myBusiness.Get<string>(Constants.OBJECT_ID);
 
             await bidObject.SaveAsync();
