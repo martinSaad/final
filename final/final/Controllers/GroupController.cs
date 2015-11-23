@@ -13,12 +13,28 @@ namespace final.Controllers
         // GET: Group
         public async System.Threading.Tasks.Task<ActionResult> CreateGroup()
         {
+            
+            Models.CreateGroup createGroup = new CreateGroup();
 
-            Models.GroupBuying gp = new GroupBuying();
-
-            var CategoriesQuery = ParseObject.GetQuery(Constants.Category);
+            var CategoriesQuery = ParseObject.GetQuery(Constants.CATEGORY);
             IEnumerable<ParseObject> categories = await CategoriesQuery.FindAsync();
+            ProductCategory product_category = new ProductCategory();
+            createGroup.categories = (List<ProductCategory>)product_category.convert(categories);
 
+
+            var SubCategoriesQuery = ParseObject.GetQuery(Constants.SUB_CATEGORY);
+            IEnumerable<ParseObject> subCategories = await SubCategoriesQuery.FindAsync();
+            SubCategory sub_category = new SubCategory();
+            createGroup.subCategories = (List<SubCategory>)sub_category.convert(subCategories);
+
+            
+            var ProductsQuery = ParseObject.GetQuery(Constants.PRODUCT_TABLE);
+            IEnumerable<ParseObject> products = await ProductsQuery.FindAsync();
+            Product product = new Product();
+            createGroup.products = (List<Product>)product.convert(products);
+            
+
+            /*
             foreach (ParseObject p in categories)
             {
                 Business temp = new Business();
@@ -26,7 +42,7 @@ namespace final.Controllers
                 temp.CategoryName = p.Get<string>("name");
                 gp.categories.Add(temp);
             }
-
+            
 
             var ProductsQuery = ParseObject.GetQuery(Constants.PRODUCT_TABLE);
             IEnumerable<ParseObject> myProducts = await ProductsQuery.FindAsync();
@@ -40,8 +56,8 @@ namespace final.Controllers
             }
 
             gp.groupCreated = new DateTime();
-
-            return View(gp);
+            */
+            return View(createGroup);
 
 
 
@@ -50,25 +66,25 @@ namespace final.Controllers
 
 
 
-        public async System.Threading.Tasks.Task<ActionResult> OpenGroup([Bind(Include = "productID")] GroupBuying group)
+        /*public async System.Threading.Tasks.Task<ActionResult> OpenGroup([Bind(Include = "productID")] GroupBuying group)
         {
-            var product = ParseObject.GetQuery("Product").WhereEqualTo(Constants.OBJECT_ID, group.productID);
+            //var product = ParseObject.GetQuery("Product").WhereEqualTo(Constants.OBJECT_ID, group.productID);
             IEnumerable<ParseObject> results = await product.FindAsync();
 
 
 
             var new_group = new ParseObject("Group_Buying");
-            new_group[group.PRODUCT] = results.FirstOrDefault();
+            new_group[Constants.PRODUCT] = results.FirstOrDefault();
             await new_group.SaveAsync();
 
 
             return RedirectToAction("GroupPage", group);
-        }
+        }*/
 
 
         public ActionResult GroupPage(GroupBuying gp)
         {
-            gp.bidSelected = false;
+            //gp.bidSelected = false;
             newGroupCreated(gp);
 
 
@@ -85,10 +101,11 @@ namespace final.Controllers
             var Business = ParseObject.GetQuery("Business");
             IEnumerable<ParseObject> bs = await Business.FindAsync();
 
+            /*
             foreach (ParseObject b in bs)
             {
-                d
-            }
+                
+            }*/
 
             //
         }

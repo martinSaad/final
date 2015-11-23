@@ -1,32 +1,61 @@
-﻿@model final.Models.GroupBuying
+﻿@model final.Models.CreateGroup
 @{
     ViewBag.Title = "Group";
 }
 
 <h2>@ViewBag.Title.</h2>
 
+
 @using (Html.BeginForm("OpenGroup", "Group", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <h4>יצירת קבוצה</h4>
     <hr />
-    
+
     <div class="form-group">
-        @Html.LabelFor(m => m.PRODUCT, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.categories, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
 
-            <select name="ProductID" style="width: 200px;">
+            <select name="ProductCategoryID" style="width: 200px;">
                 <option value="0">ללא</option>
-                @foreach (var product in Model.products)
+                @foreach (var category in Model.categories)
                 {
-                    <option value="@product.productID">@product.title</option>
+                    <option value="@category.objectId">@category.name</option>
                 }
             </select>
         </div>
 
     </div>
 
+    <div class="form-group">
+        @Html.LabelFor(m => m.subCategories, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
 
+            <select name="SubCategoryID" style="width: 200px;">
+                <option value="0">ללא</option>
+                @foreach (var sub in Model.subCategories)
+                {
+                    <option value="@sub.objectId">@sub.name</option>
+                }
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.products, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+
+            <select name="ProductID" style="width: 200px;">
+                <option value="0">ללא</option>
+                @foreach (var product in Model.products)
+                {
+                    <option value="@product.objectId">@product.title</option>
+                }
+            </select>
+        </div>
+
+    </div>
 
 
     <div class="form-group">
