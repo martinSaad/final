@@ -1,7 +1,41 @@
 ﻿
 @{
     ViewBag.Title = "MyActiveGroups";
+    int i = 0;
+    List<string> comments = ViewBag.comments;
+    List<int> prices = ViewBag.prices;
+    List<int> users = ViewBag.users;
 }
 
-<h2>MyActiveGroups</h2>
+
+<table class="table">
+    <tr>
+        <th>קבוצה</th>
+        <th>מחיר</th>
+        <th>הערות</th>
+
+
+    </tr>
+
+    @foreach (var group in ViewBag.groups)
+            {
+        <tr>
+            <td>
+                @group.ObjectId
+            </td>
+
+            <td>
+                @prices.ElementAt(i)
+            </td>
+            <td>
+                @comments.ElementAt(i)
+            </td>
+            <td>
+                @users.ElementAt(i)
+            </td>
+        </tr>
+        i++;
+    }
+
+</table>
 

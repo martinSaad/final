@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "GroupsWitingForBid";
+    int i = 0;
+    List<string> products = ViewBag.products;
+    List<TimeSpan> timeToOffer = ViewBag.timeToOffer;
+}
+
+
+        <table class="table">
+            <tr>
+                <th>קבוצה</th>
+                <th>מוצר</th> 
+                <th>זמן נותר להצעת מחיר</th>
+                <th>משתמשים</th>
+                
+
+            </tr>
+            
+            @foreach (var group in ViewBag.groups)
+            {
+                <tr>
+                    <td>
+                        @group.ObjectId
+                    </td>
+                   
+                    <td>
+                        @products.ElementAt(i)
+                    </td>
+                   <td>
+                      @timeToOffer.ElementAt(i) 
+                   </td>
+                </tr>
+                i++;
+            }
+
+        </table>
+

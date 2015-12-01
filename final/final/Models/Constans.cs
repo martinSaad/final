@@ -15,7 +15,7 @@ namespace final.Models
         public const string GROUP_BUYING_TABLE = "Group_Buying";
         public const string BID_TABLE = "Bid";
         public const string BUSINESS_TABLE = "Business";
-        public const string WINNING_BID_TABLE = "WinningBid";
+        public const string WINNING_BID_TABLE = "Winning_Bid";
         public const string CATEGORY = "Product_Category";
         public const string SUB_CATEGORY = "Product_Sub_Category";
 
@@ -27,6 +27,7 @@ namespace final.Models
         public const string PRODUCT = "product";
         public const string BIDS = "bids";
         public const string GROUP_MANAGER = "group_manager";
+        public const string ACTIVE = "active";
 
 
         //user
@@ -62,7 +63,7 @@ namespace final.Models
         public const string IMAGE = "image";
 
         //winnig Bid
-        public const string BID_ID = "bid_id";
+        public const string BID = "bid";
 
         //product cellphone
         public const string SCREEN_SIZE = "screen_size";
