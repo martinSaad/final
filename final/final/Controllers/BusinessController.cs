@@ -12,6 +12,8 @@ namespace final.Controllers
     public class BusinessController : Controller
     {
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        ParseController parseController = new ParseController();
+
 
         // GET: Business
         public ActionResult Dashboard()
@@ -43,7 +45,7 @@ namespace final.Controllers
             return allGroups;
         }
 
-        private async Task<ParseObject> retrieveMyBusiness()
+ /*       private async Task<ParseObject> retrieveMyBusiness()
         {
             var currentUser = ParseUser.CurrentUser;
             var myBusinessQuery = ParseObject.GetQuery(Constants.BUSINESS_TABLE).WhereEqualTo(Constants.USER, currentUser);
@@ -51,7 +53,7 @@ namespace final.Controllers
             return myBusiness;
         }
 
-
+            */
         private async Task<ParseObject> retrieveProductOfGroup(ParseObject group)
         {
             //minProduct is just to obtain the product objectId
@@ -115,7 +117,7 @@ namespace final.Controllers
             List<string> products = new List<string>(); //return value
             List<TimeSpan> timeToOffer = new List<TimeSpan>(); //return value
 
-            ParseObject myBusiness = await retrieveMyBusiness();
+            ParseObject myBusiness = await parseController.retrieveMyBusiness();
 
             IEnumerable<ParseObject> allGroups = await retrieveAllGroups();
 
