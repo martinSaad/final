@@ -158,6 +158,7 @@ namespace final.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 //ParseUser registration
+
                 var parseUser = new ParseUser()
                 {
                     Username = model.Email,
