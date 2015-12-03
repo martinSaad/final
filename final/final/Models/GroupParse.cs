@@ -57,7 +57,7 @@ namespace final.Models
             }
             catch (Exception e)
             {
-
+                // add log
                 throw e;
             }
         }
@@ -78,12 +78,26 @@ namespace final.Models
             }
             catch (Exception e)
             {
-
+                //add log
                 throw e;
             }
         }
 
-        
+        public static async Task<ParseObject> retrieveGroup(string groupId)
+        {
+            try
+            {
+                var groupQuery = ParseObject.GetQuery(Constants.GROUP_BUYING_TABLE).WhereEqualTo(Constants.OBJECT_ID, groupId);
+                ParseObject group = await groupQuery.FirstAsync();
+
+                return group;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
 
     }
 }

@@ -50,6 +50,12 @@ namespace final.Models
             return GroupParse.retrieveProductOfGroup(group);
         }
 
+        public Task<ParseObject> retrieveGroup(string groupId)
+        {
+            return GroupParse.retrieveGroup(groupId);
+        }
+
+
         //winning bid
         public Task<IEnumerable<ParseObject>> retrieveWinningBids()
         {
@@ -66,6 +72,12 @@ namespace final.Models
         {
             return BidParse.retrieveGroupOfBid(bid);
         }
+
+        public void createBid(ParseObject business, string groupId, double price, string comments)
+        {
+            BidParse.createBid(business, groupId, price, comments);
+        }
+
 
         //category
         public Task<IEnumerable<ParseObject>> retrieveCategories()

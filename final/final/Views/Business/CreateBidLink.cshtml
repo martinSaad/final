@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "CreateBid";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("CreateBid", "Business", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h4>הגש הצעת מחיר</h4>
+    <hr />
+    
+    <table>
+        <tr>
+            <td>מחיר</td>
+            <td>
+                <input type="text" name="price" /> 
+            </td> 
+        </tr>
+
+        <tr>
+            <td>הערות</td>
+            <td><input type="text" name="comments" /> </td>
+        </tr>
+
+    </table>
+
+    <input type="submit" value="שליחה" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

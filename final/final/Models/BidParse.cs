@@ -28,5 +28,27 @@ namespace final.Models
                 throw e;
             }
         }
+
+        public static async void createBid(ParseObject business, string groupId, double price, string comments)
+        {
+            try
+            {
+                var bidObject = new ParseObject(Constants.BID_TABLE);
+                bidObject[Constants.PRICE] = price;
+                bidObject[Constants.COMMENTS] = comments;
+                bidObject[Constants.BUSINESS] = business;
+
+                Model model = new Model();
+                ParseObject product = await model.retrieveGroup(groupId);
+
+                await bidObject.SaveAsync();
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
+
     }
 }

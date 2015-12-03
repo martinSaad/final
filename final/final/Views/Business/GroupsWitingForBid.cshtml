@@ -13,6 +13,7 @@
                 <th>מוצר</th> 
                 <th>זמן נותר להצעת מחיר</th>
                 <th>משתמשים</th>
+                <th>הגש הצעה</th>
                 
 
             </tr>
@@ -30,6 +31,12 @@
                    <td>
                       @timeToOffer.ElementAt(i) 
                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        @Html.ActionLink("הגש הצעה", "CreateBidLink", "Business" , new { groupId = group.ObjectId },null)
+                    </td>
                 </tr>
                 i++;
             }

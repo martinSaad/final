@@ -20,7 +20,7 @@ namespace final.Controllers
         {
 
             logger.Debug("Dashboard method is called");
-            logger.Error("error in logger");   
+            logger.Error("error in logger");
             return View();
         }
 
@@ -31,7 +31,7 @@ namespace final.Controllers
 
             int differenceInDays = ts.Days;
             int differenceInHours = ts.Hours;
-            if (differenceInDays==0 && differenceInHours < 24)
+            if (differenceInDays == 0 && differenceInHours < 24)
                 return ts;
 
             //if not
@@ -126,32 +126,32 @@ namespace final.Controllers
         }
 
 
-   /*          public async System.Threading.Tasks.Task<ActionResult> CreateBid([Bind(Include = "price,comments,groupBuyingId")] Bid bid)
-             {
-                ParseObject myBusiness = await retrieveMyBusiness();
+        public ActionResult CreateBidLink(string groupId)
+        {
+           // ParseObject product = model.retrieveProduct(productId);
+            TempData["groupId"] = groupId;
+            return View();
+        }
 
-                 //create new bid
-                 var bidObject = new ParseObject(Constants.BID_TABLE);
-                 bidObject[Constants.PRICE] = bid.price;
-                 bidObject[Constants.COMMENTS] = bid.comments;
+        public async System.Threading.Tasks.Task<ActionResult> CreateBid(FormCollection coll)
+        {
+            ParseObject myBusiness = await model.retrieveMyBusiness();
+            string groupId = (string)TempData["groupId"];
+            double price = Convert.ToDouble(coll[Constants.PRICE]);
+            string comments = coll[Constants.COMMENTS];
 
-                 //TODO: groupBuyingId is passeed from previous page (Groups)
-                 //bidObject[Constants.GROUP_BUYING_ID] = bid.groupBuyingId;
-                 bidObject[Constants.BUSINESS_ID] = myBusiness.Get<string>(Constants.OBJECT_ID);
+            model.createBid(myBusiness, groupId, price, comments);
 
-                 await bidObject.SaveAsync();
-                 return View();
-             }
+            return View();
+        }
 
-         
-    */
+
+
 
 
 
         public async System.Threading.Tasks.Task<ActionResult> MyProducts()
-        {
-
-
+        { 
 
             return View();
         }
