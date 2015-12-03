@@ -12,7 +12,7 @@ namespace final.Controllers
     public class BusinessController : Controller
     {
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        ParseController parseController = new ParseController();
+        Model model = new Model();
 
 
         // GET: Business
@@ -38,77 +38,6 @@ namespace final.Controllers
             return TimeSpan.Zero;
         }
 
-        private async Task<IEnumerable<ParseObject>> retrieveAllGroups()
-        {
-            var allGroupsQuery = ParseObject.GetQuery(Constants.GROUP_BUYING_TABLE).WhereEqualTo(Constants.ACTIVE, true);
-            IEnumerable<ParseObject> allGroups = await allGroupsQuery.FindAsync();
-            return allGroups;
-        }
-
- /*       private async Task<ParseObject> retrieveMyBusiness()
-        {
-            var currentUser = ParseUser.CurrentUser;
-            var myBusinessQuery = ParseObject.GetQuery(Constants.BUSINESS_TABLE).WhereEqualTo(Constants.USER, currentUser);
-            ParseObject myBusiness = await myBusinessQuery.FirstAsync();
-            return myBusiness;
-        }
-
-            */
-        private async Task<ParseObject> retrieveProductOfGroup(ParseObject group)
-        {
-            //minProduct is just to obtain the product objectId
-            ParseObject minProduct = group.Get<ParseObject>(Constants.PRODUCT);
-
-            //product is a Pointer in the group, therefore we need to query him
-            var productQuery = ParseObject.GetQuery(Constants.PRODUCT_TABLE).WhereEqualTo(Constants.OBJECT_ID, minProduct.ObjectId);
-            ParseObject product = await productQuery.FirstAsync();
-
-            return product;
-        }
-
-        private async Task<IEnumerable<ParseObject>> businessesWhoHaveThisProduct(ParseObject product)
-        {
-            var relation = product.GetRelation<ParseObject>(Constants.BUSINESS);
-            IEnumerable<ParseObject> businesses = await relation.Query.FindAsync();
-            return businesses;
-        }
-
-        private async Task<IEnumerable<ParseObject>> retrieveWinningBids()
-        {
-            var winningBidsQuery = ParseObject.GetQuery(Constants.WINNING_BID_TABLE);
-            IEnumerable<ParseObject> winningBids = await winningBidsQuery.FindAsync();
-            return winningBids;
-        }
-
-        private async Task<ParseObject> retrieveBidOfWinningBid(ParseObject winningBid)
-        {
-            var bidQuery = ParseObject.GetQuery(Constants.BID_TABLE).WhereEqualTo(Constants.OBJECT_ID, winningBid.ObjectId);
-            ParseObject bid = await bidQuery.FirstAsync();
-
-            return bid;
-        }
-
-        private async Task<ParseObject> retrieveGroupOfBid(ParseObject bid)
-        {
-            //minGroup is just to obtain the group objectId
-            ParseObject minGroup = bid.Get<ParseObject>(Constants.GROUP_BUYING_ID);
-
-            //group is a Pointer in the bid, therefore we need to query him
-            var groupQuery = ParseObject.GetQuery(Constants.GROUP_BUYING_TABLE).WhereEqualTo(Constants.OBJECT_ID, minGroup.ObjectId);
-            ParseObject group = await groupQuery.FirstAsync();
-
-            return group;
-        }
-
-        private async Task<IEnumerable<ParseObject>> retrieveUsersOfGroup(ParseObject group)
-        {
-            //extract how many users are currently in the group
-            ParseRelation<ParseUser> userRelation = group.GetRelation<ParseUser>(Constants.USERS);
-            IEnumerable<ParseObject> groupUsers = await userRelation.Query.FindAsync();
-
-            return groupUsers;
-        }
-
 
         //return list of groups - waiting for bid! - that are relevant for this current business
         public async System.Threading.Tasks.Task<ActionResult> GroupsWitingForBid()
@@ -117,17 +46,17 @@ namespace final.Controllers
             List<string> products = new List<string>(); //return value
             List<TimeSpan> timeToOffer = new List<TimeSpan>(); //return value
 
-            ParseObject myBusiness = await parseController.retrieveMyBusiness();
+            ParseObject myBusiness = await model.retrieveMyBusiness();
 
-            IEnumerable<ParseObject> allGroups = await retrieveAllGroups();
+            IEnumerable<ParseObject> allGroups = await model.retrieveAllGroups();
 
             foreach (ParseObject group in allGroups)
             {
 
-                ParseObject product = await retrieveProductOfGroup(group);
+                ParseObject product = await model.retrieveProductOfGroup(group);
 
                 //extract business field from product
-                IEnumerable<ParseObject> businesses = await businessesWhoHaveThisProduct(product);
+                IEnumerable<ParseObject> businesses = await model.businessesWhoHaveThisProduct(product);
 
                 //check if my business has this particular product
                 foreach (ParseObject business in businesses)
@@ -162,13 +91,13 @@ namespace final.Controllers
             List<ParseObject> groups = new List<ParseObject>(); //return value
             List<int> users = new List<int>(); //return value
 
-            ParseObject myBusiness = await retrieveMyBusiness();
+            ParseObject myBusiness = await model.retrieveMyBusiness();
 
-            IEnumerable<ParseObject> winningBids = await retrieveWinningBids();
+            IEnumerable<ParseObject> winningBids = await model.retrieveWinningBids();
 
             foreach (ParseObject winningBid in winningBids)
             {
-                ParseObject bid = await retrieveBidOfWinningBid(winningBid);
+                ParseObject bid = await model.retrieveBidOfWinningBid(winningBid);
 
                 ParseObject businessOfBid = bid.Get<ParseObject>(Constants.BUSINESS_ID);
 
@@ -177,10 +106,10 @@ namespace final.Controllers
                     int price = bid.Get<int>(Constants.PRICE);
                     string comment = bid.Get<string>(Constants.COMMENTS);
 
-                    ParseObject group = await retrieveGroupOfBid(bid);
+                    ParseObject group = await model.retrieveGroupOfBid(bid);
 
                     //extract how many users are currently in the group
-                    IEnumerable<ParseObject> groupUsers = await retrieveUsersOfGroup(group);
+                    IEnumerable<ParseObject> groupUsers = await model.retrieveUsersOfGroup(group);
 
                     users.Add(groupUsers.Count());
                     prices.Add(price);
