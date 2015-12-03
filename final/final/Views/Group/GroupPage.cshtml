@@ -1,11 +1,12 @@
 ﻿@{
     ViewBag.Title = "GroupPage";
-
+    string ProductID = ViewBag.Product.ObjectId;
+    
 }
 
 @if (!ViewBag.NewGroupCreatedRightNow)
 {
-    <h2>קבוצת רכישה כבר קיימת למוצר הזה... אתה מועבר לשם עכשיו</h2>
+    <h2>@{ Response.Redirect("~/Group/Group");}</h2>
 }
 else if (ViewBag.NewGroupCreatedRightNow)
 {

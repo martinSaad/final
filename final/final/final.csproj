@@ -257,6 +257,7 @@
     <Content Include="Views\Business\MyActiveGroups.cshtml" />
     <Content Include="Views\Business\MyProducts.cshtml" />
     <Content Include="Views\Group\GroupPage.cshtml" />
+    <Content Include="Views\Group\Group.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
