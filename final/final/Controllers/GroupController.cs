@@ -3,6 +3,7 @@ using Parse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,101 +14,91 @@ namespace final.Controllers
         // GET: Group
         public async System.Threading.Tasks.Task<ActionResult> CreateGroup()
         {
-            
-            Models.CreateGroup createGroup = new CreateGroup();
 
+            //Query for the select Lists of Category, SubCategory & Product
             var CategoriesQuery = ParseObject.GetQuery(Constants.CATEGORY);
             IEnumerable<ParseObject> categories = await CategoriesQuery.FindAsync();
-            ProductCategory product_category = new ProductCategory();
-            createGroup.categories = (List<ProductCategory>)product_category.convert(categories);
-
-
             var SubCategoriesQuery = ParseObject.GetQuery(Constants.SUB_CATEGORY);
             IEnumerable<ParseObject> subCategories = await SubCategoriesQuery.FindAsync();
-            SubCategory sub_category = new SubCategory();
-            createGroup.subCategories = (List<SubCategory>)sub_category.convert(subCategories);
-
-            
             var ProductsQuery = ParseObject.GetQuery(Constants.PRODUCT_TABLE);
             IEnumerable<ParseObject> products = await ProductsQuery.FindAsync();
-            Product product = new Product();
-            createGroup.products = (List<Product>)product.convert(products);
-            
-
-            /*
-            foreach (ParseObject p in categories)
-            {
-                Business temp = new Business();
-                temp.CategoryID = p.ObjectId;
-                temp.CategoryName = p.Get<string>("name");
-                gp.categories.Add(temp);
-            }
-            
-
-            var ProductsQuery = ParseObject.GetQuery(Constants.PRODUCT_TABLE);
-            IEnumerable<ParseObject> myProducts = await ProductsQuery.FindAsync();
-
-            foreach (ParseObject p in myProducts)
-            {
-                Product temp = new Product();
-                temp.productID = p.ObjectId;
-                temp.title = p.Get<string>("title");
-                gp.products.Add(temp);
-            }
-
-            gp.groupCreated = new DateTime();
-            */
-            return View(createGroup);
 
 
+            //ViewBags sent to the view
+            ViewBag.Categories = categories;
+            ViewBag.SubCategories = subCategories;
+            ViewBag.Products = products;
+
+
+            return View();
 
         }
 
+        
 
-
-
-        /*public async System.Threading.Tasks.Task<ActionResult> OpenGroup([Bind(Include = "productID")] GroupBuying group)
+        public async System.Threading.Tasks.Task<ActionResult> OpenGroup(FormCollection coll)
         {
-            //var product = ParseObject.GetQuery("Product").WhereEqualTo(Constants.OBJECT_ID, group.productID);
-            IEnumerable<ParseObject> results = await product.FindAsync();
+            //User wants to open new group of those parameters:
+            string selectedCategory = coll[Constants.CATEGORY_ID];
+            string selectedSubCategory = coll[Constants.SUB_CATEGORY_ID];
+            string selectedProduct = coll[Constants.PRODUCT_ID];
 
 
+            //check if we have active group for the same product
+            bool AlreadyHaveActiveGroupForThisProduct = false;
+            var allGroups = ParseObject.GetQuery(Constants.GROUP_BUYING_TABLE).WhereEqualTo(Constants.ACTIVE, true);
+            IEnumerable<ParseObject> groups = await allGroups.FindAsync();
+            foreach (ParseObject group in groups)
+            {
+                ParseObject minProduct = group.Get<ParseObject>(Constants.PRODUCT);
+                if (minProduct.ObjectId == selectedProduct)
+                    AlreadyHaveActiveGroupForThisProduct = true;
+            }
 
-            var new_group = new ParseObject("Group_Buying");
-            new_group[Constants.PRODUCT] = results.FirstOrDefault();
-            await new_group.SaveAsync();
+
+            //if we don't have active group right now of this product, lets create a new one!
+            if (!AlreadyHaveActiveGroupForThisProduct)
+            {
+                var product = ParseObject.GetQuery(Constants.PRODUCT_TABLE).WhereEqualTo(Constants.OBJECT_ID, selectedProduct);
+                IEnumerable<ParseObject> results = await product.FindAsync();
+                var newGroup = new ParseObject(Constants.GROUP_BUYING_TABLE);
+                newGroup[Constants.PRODUCT] = results.FirstOrDefault();
+                newGroup[Constants.ACTIVE] = true; //we just created new group of this product so now we have an active group until the group will finished
+                await newGroup.SaveAsync();
+
+                ViewBag.NewGroupCreatedRightNow = newGroup;
+                //newGroupCreated(gp);
+            }
+
+            return View("GroupPage");
+        }
 
 
-            return RedirectToAction("GroupPage", group);
+        /*public ActionResult GroupPage()
+        {
+            //gp.bidSelected = false;
+            //newGroupCreated(gp);
+
+
+            return View();
         }*/
 
 
-        public ActionResult GroupPage(GroupBuying gp)
+
+
+
+
+
+
+        public async void newGroupCreated(string ObjectId)
         {
-            //gp.bidSelected = false;
-            newGroupCreated(gp);
-
-
-            return View(gp);
-        }
-
-
-
-
-        public async void newGroupCreated(GroupBuying gp)
-        {
-
             //notify relevant bussiness In Email by product type
             var Business = ParseObject.GetQuery("Business");
             IEnumerable<ParseObject> bs = await Business.FindAsync();
 
-            /*
-            foreach (ParseObject b in bs)
-            {
-                
-            }*/
 
-            //
+
+
         }
 
     }

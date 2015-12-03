@@ -1,70 +1,77 @@
-﻿@model final.Models.CreateGroup
-@{
-    ViewBag.Title = "Group";
+﻿@{
+    ViewBag.Title = "CreateGroup";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>יצירת קבוצה</h2>
 
 
-@using (Html.BeginForm("OpenGroup", "Group", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>יצירת קבוצה</h4>
-    <hr />
+<br /><br />
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.categories, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+<div style="float:right; direction:rtl;">
+    @using (Html.BeginForm("OpenGroup", "Group",FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            קטגוריה
+            <div class="col-md-9">
+                <select name="CategoryID" style="width: 200px;">
+                    <option value="0">ללא</option>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.ObjectId">@category.ObjectId</option>
+                    }
+                </select>
+            </div>
 
-            <select name="ProductCategoryID" style="width: 200px;">
-                <option value="0">ללא</option>
-                @foreach (var category in Model.categories)
-                {
-                    <option value="@category.objectId">@category.name</option>
-                }
-            </select>
         </div>
 
-    </div>
+        <div class="form-group">
+            תת-קטגוריה
+            <div class="col-md-9">
+                <select name="SubCategoryID" style="width: 200px;">
+                    <option value="0">ללא</option>
+                    @foreach (var subcategory in ViewBag.SubCategories)
+                    {
+                        <option value="@subcategory.ObjectId">@subcategory.ObjectId</option>
+                    }
+                </select>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.subCategories, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-
-            <select name="SubCategoryID" style="width: 200px;">
-                <option value="0">ללא</option>
-                @foreach (var sub in Model.subCategories)
-                {
-                    <option value="@sub.objectId">@sub.name</option>
-                }
-            </select>
         </div>
 
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.products, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        <div class="form-group">
+            קטגוריה
+            <div class="col-md-9">
+                <select name="ProductID" style="width: 200px;">
+                    <option value="0">ללא</option>
+                    @foreach (var product in ViewBag.Products)
+                    {
+                        <option value="@product.ObjectId">@product.ObjectId</option>
+                    }
+                </select>
+            </div>
 
-            <select name="ProductID" style="width: 200px;">
-                <option value="0">ללא</option>
-                @foreach (var product in Model.products)
-                {
-                    <option value="@product.objectId">@product.title</option>
-                }
-            </select>
         </div>
 
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="יצירה" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="יצירה" />
+            </div>
         </div>
-    </div>
-}
+    }
+
+
+
+
+
+
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+

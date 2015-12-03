@@ -10,6 +10,7 @@ namespace final.Models
 {
     public class CreateGroup
     {
+        /*
         public IEnumerable<Product> products { get; set; }
         public IEnumerable<ProductCategory> categories { get; set; }
         public IEnumerable<SubCategory> subCategories { get; set; }
@@ -20,7 +21,7 @@ namespace final.Models
             this.subCategories = new List<SubCategory>();
             this.products = new List<Product>();
 
-        }
+        }*/
     }
 }
 
