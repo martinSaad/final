@@ -75,5 +75,12 @@ namespace final.Models
         public const string TYPE = "type";
         public const string PRODUCT_CELLPHONE = "product_cellphone";
         public const string PRODUCT_TELEVISION = "product_television";
+
+
+
+        //form input names
+        public const string PRODUCT_ID = "ProductID";
+        public const string CATEGORY_ID = "CategoryID";
+        public const string SUB_CATEGORY_ID = "SubCategoryID";
     }
 }
