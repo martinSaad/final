@@ -10,7 +10,7 @@ namespace final.Models
     public class GroupParse
     {
 
-        public static async Task<IEnumerable<ParseObject>> retrieveAllGroups()
+        public static async Task<IEnumerable<ParseObject>> retrieveAllActiveGroups()
         {
             try
             {
@@ -61,6 +61,29 @@ namespace final.Models
                 throw e;
             }
         }
+
+
+
+        public static async void createGroup(ParseObject product)
+        {
+            try
+            {
+                var newGroup = new ParseObject(Constants.GROUP_BUYING_TABLE);
+                newGroup[Constants.PRODUCT] = product;
+                newGroup[Constants.ACTIVE] = true; //we just created new group of this product so now we have an active group until the group will finished
+                newGroup[Constants.EXPIRATION_DATE] = DateTime.Now.AddDays(Constants.GROUP_LIFE_TIME);
+
+                await newGroup.SaveAsync();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        
 
     }
 }

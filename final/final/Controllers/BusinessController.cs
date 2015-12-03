@@ -48,7 +48,7 @@ namespace final.Controllers
 
             ParseObject myBusiness = await model.retrieveMyBusiness();
 
-            IEnumerable<ParseObject> allGroups = await model.retrieveAllGroups();
+            IEnumerable<ParseObject> allGroups = await model.retrieveAllActiveGroups();
 
             foreach (ParseObject group in allGroups)
             {

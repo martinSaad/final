@@ -14,11 +14,14 @@ namespace final.Models
 
         //product
         Task<IEnumerable<ParseObject>> businessesWhoHaveThisProduct(ParseObject product);
+        Task<IEnumerable<ParseObject>> retrieveAllProducts();
+        Task<ParseObject> retrieveProduct(string productID);
 
         //group
-        Task<IEnumerable<ParseObject>> retrieveAllGroups();
+        Task<IEnumerable<ParseObject>> retrieveAllActiveGroups();
         Task<IEnumerable<ParseObject>> retrieveUsersOfGroup(ParseObject group);
         Task<ParseObject> retrieveProductOfGroup(ParseObject group);
+        void createGroup(ParseObject product);
 
         //winning bid
         Task<IEnumerable<ParseObject>> retrieveWinningBids();
@@ -26,6 +29,12 @@ namespace final.Models
 
         //bid
         Task<ParseObject> retrieveGroupOfBid(ParseObject bid);
+
+        //category
+        Task<IEnumerable<ParseObject>> retrieveCategories();
+
+        //subcategory
+        Task<IEnumerable<ParseObject>> retrieveSubCategories();
 
     }
 

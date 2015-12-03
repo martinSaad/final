@@ -29,10 +29,19 @@ namespace final.Models
             return parseModel.businessesWhoHaveThisProduct(product);
         }
 
-        //group
-        public Task<IEnumerable<ParseObject>> retrieveAllGroups()
+        public Task<IEnumerable<ParseObject>> retrieveAllProducts()
         {
-            return parseModel.retrieveAllGroups();
+            return parseModel.retrieveAllProducts();
+        }
+        public Task<ParseObject> retrieveProduct(string productID)
+        {
+            return parseModel.retrieveProduct(productID);
+
+        }
+        //group
+        public Task<IEnumerable<ParseObject>> retrieveAllActiveGroups()
+        {
+            return parseModel.retrieveAllActiveGroups();
         }
 
         public Task<IEnumerable<ParseObject>> retrieveUsersOfGroup(ParseObject group)
@@ -43,6 +52,12 @@ namespace final.Models
         public Task<ParseObject> retrieveProductOfGroup(ParseObject group)
         {
             return parseModel.retrieveProductOfGroup(group);
+        }
+
+        public void createGroup(ParseObject product)
+        {
+            parseModel.createGroup(product);
+
         }
 
         //winning bid
@@ -59,6 +74,19 @@ namespace final.Models
         public Task<ParseObject> retrieveGroupOfBid(ParseObject bid)
         {
             return parseModel.retrieveGroupOfBid(bid);
+        }
+
+        //categories
+        public Task<IEnumerable<ParseObject>> retrieveCategories()
+        {
+            return parseModel.retrieveCategories();
+        }
+
+
+        //sub categories
+        public Task<IEnumerable<ParseObject>> retrieveSubCategories()
+        {
+            return parseModel.retrieveSubCategories();
         }
     }
 }

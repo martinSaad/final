@@ -20,11 +20,24 @@ namespace final.Models
         {
             return ProductParse.businessesWhoHaveThisProduct(product);
         }
+        public Task<IEnumerable<ParseObject>> retrieveAllProducts()
+        {
+            return ProductParse.retrieveAllProducts();
+        }
+        public Task<ParseObject> retrieveProduct(string productID)
+        {
+            return ProductParse.retrieveProduct(productID);
+        }
 
         //group
-        public Task<IEnumerable<ParseObject>> retrieveAllGroups()
+        public Task<IEnumerable<ParseObject>> retrieveAllActiveGroups()
         {
-            return GroupParse.retrieveAllGroups();
+            return GroupParse.retrieveAllActiveGroups();
+        }
+        public void createGroup(ParseObject product)
+        {
+            GroupParse.createGroup(product);
+
         }
 
         public Task<IEnumerable<ParseObject>> retrieveUsersOfGroup(ParseObject group)
@@ -53,5 +66,18 @@ namespace final.Models
         {
             return BidParse.retrieveGroupOfBid(bid);
         }
+
+        //category
+        public Task<IEnumerable<ParseObject>> retrieveCategories()
+        {
+            return CategoryParse.retrieveCategory();
+        }
+
+        //sub category
+        public Task<IEnumerable<ParseObject>> retrieveSubCategories()
+        {
+            return SubCategoryParse.retrieveSubCategory();
+        }
+
     }
 }

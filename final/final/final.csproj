@@ -189,6 +189,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BidParse.cs" />
+    <Compile Include="Models\CategoryParse.cs" />
     <Compile Include="Models\Constans.cs" />
     <Compile Include="Models\BusinessParse.cs" />
     <Compile Include="Models\GroupParse.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Models\ParseModel.cs" />
     <Compile Include="Models\ParseInterface.cs" />
     <Compile Include="Models\ProductParse.cs" />
+    <Compile Include="Models\SubCategoryParse.cs" />
     <Compile Include="Models\WinningBidParse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

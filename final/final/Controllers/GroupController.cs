@@ -11,27 +11,23 @@ namespace final.Controllers
 {
     public class GroupController : Controller
     {
+        Model model = new Model();
         // GET: Group
         public async System.Threading.Tasks.Task<ActionResult> CreateGroup()
         {
 
             //Query for the select Lists of Category, SubCategory & Product
-            var CategoriesQuery = ParseObject.GetQuery(Constants.CATEGORY);
-            IEnumerable<ParseObject> categories = await CategoriesQuery.FindAsync();
-            var SubCategoriesQuery = ParseObject.GetQuery(Constants.SUB_CATEGORY);
-            IEnumerable<ParseObject> subCategories = await SubCategoriesQuery.FindAsync();
-            var ProductsQuery = ParseObject.GetQuery(Constants.PRODUCT_TABLE);
-            IEnumerable<ParseObject> products = await ProductsQuery.FindAsync();
-
+            IEnumerable<ParseObject> categories = await model.retrieveCategories();
+            IEnumerable<ParseObject> subCategories = await model.retrieveSubCategories();
+            IEnumerable<ParseObject> products = await model.retrieveAllProducts();
+            
 
             //ViewBags sent to the view
             ViewBag.Categories = categories;
             ViewBag.SubCategories = subCategories;
             ViewBag.Products = products;
 
-
             return View();
-
         }
 
         
@@ -48,12 +44,11 @@ namespace final.Controllers
             
             //check if we have active group for the same product
             bool AlreadyHaveActiveGroupForThisProduct = false;
-            var allGroups = ParseObject.GetQuery(Constants.GROUP_BUYING_TABLE).WhereEqualTo(Constants.ACTIVE, true);
-            IEnumerable<ParseObject> groups = await allGroups.FindAsync();
+            IEnumerable<ParseObject> groups = await model.retrieveAllActiveGroups();
             foreach (ParseObject group in groups)
             {
-                ParseObject minProduct = group.Get<ParseObject>(Constants.PRODUCT);
-                if (minProduct.ObjectId == selectedProduct)
+                ParseObject product = group.Get<ParseObject>(Constants.PRODUCT);
+                if (product.ObjectId == selectedProduct)
                     AlreadyHaveActiveGroupForThisProduct = true;
             }
 
@@ -61,17 +56,12 @@ namespace final.Controllers
             //if we don't have active group right now of this product, lets create a new one!
             if (!AlreadyHaveActiveGroupForThisProduct)
             {
-                
-                var product = ParseObject.GetQuery(Constants.PRODUCT_TABLE).WhereEqualTo(Constants.OBJECT_ID, selectedProduct);
-                IEnumerable<ParseObject> results = await product.FindAsync();
-                var newGroup = new ParseObject(Constants.GROUP_BUYING_TABLE);
-                newGroup[Constants.PRODUCT] = results.FirstOrDefault();
-                newGroup[Constants.ACTIVE] = true; //we just created new group of this product so now we have an active group until the group will finished
+                ParseObject product = await model.retrieveProduct(selectedProduct);
+                model.createGroup(product);
                 
                 //pass parameters to the GroupPage Action Result (because this function is in the middle)
-                TempData["NewGroupCreated"] = newGroup;
+                TempData["NewGroupCreated"] = product;
                 
-                await newGroup.SaveAsync();
             }
 
 

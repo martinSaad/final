@@ -8,6 +8,7 @@ namespace final.Models
     public static class Constants
     {
         public const int MAX_TIME_GRPUO_OFFER = 24; //hours
+        public const double GROUP_LIFE_TIME = 4.0;
 
         //tables
         public const string OBJECT_ID = "objectId";
@@ -16,8 +17,8 @@ namespace final.Models
         public const string BID_TABLE = "Bid";
         public const string BUSINESS_TABLE = "Business";
         public const string WINNING_BID_TABLE = "Winning_Bid";
-        public const string CATEGORY = "Product_Category";
-        public const string SUB_CATEGORY = "Product_Sub_Category";
+        public const string CATEGORY_TABLE = "Product_Category";
+        public const string SUB_CATEGORY_TABLE = "Product_Sub_Category";
 
 
 

@@ -23,5 +23,42 @@ namespace final.Models
                 throw e;
             }
         }
+
+
+
+        public static async Task<IEnumerable<ParseObject>> retrieveAllProducts()
+        {
+            try
+            {
+                var ProductsQuery = ParseObject.GetQuery(Constants.PRODUCT_TABLE);
+                IEnumerable<ParseObject> products = await ProductsQuery.FindAsync();
+
+                return products;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
+
+
+
+        public static async Task<ParseObject> retrieveProduct(string productID)
+        {
+            try
+            {
+                var productQuery = ParseObject.GetQuery(Constants.PRODUCT_TABLE).WhereEqualTo(Constants.OBJECT_ID, productID);
+                ParseObject product = await productQuery.FirstAsync();
+
+
+                return product;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
     }
 }
