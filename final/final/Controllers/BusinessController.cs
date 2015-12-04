@@ -145,8 +145,9 @@ namespace final.Controllers
             double priceStep4 = Convert.ToDouble(coll[Constants.PRICE_STEP_4]);
             double priceStep5 = Convert.ToDouble(coll[Constants.PRICE_STEP_5]);
             string comments = coll[Constants.COMMENTS];
-
-            await model.createBid(myBusiness, groupId, maxUints, originalPrice, priceStep1, priceStep2, priceStep3, priceStep4, priceStep5, comments);
+            double guarantee = Convert.ToDouble(coll[Constants.GUARANTEE]);
+            bool shipping = Convert.ToBoolean(coll[Constants.SHIPPING]);
+            await model.createBid(myBusiness, groupId, maxUints, originalPrice, priceStep1, priceStep2, priceStep3, priceStep4, priceStep5, comments, guarantee, shipping);
 
             return View();
         }

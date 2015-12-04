@@ -34,7 +34,7 @@ namespace final.Models
 
         //bid
         Task<ParseObject> retrieveGroupOfBid(ParseObject bid);
-        Task<bool> createBid(ParseObject business, string groupId, double maxUnits, double originalPrice, double priceStep1, double priceStep2, double priceStep3, double priceStep4, double priceStep5, string comments);
+        Task<bool> createBid(ParseObject business, string groupId, double maxUnits, double originalPrice, double priceStep1, double priceStep2, double priceStep3, double priceStep4, double priceStep5, string comments, double guarantee, bool shipping);
 
         //category
         Task<IEnumerable<ParseObject>> retrieveCategories();

@@ -29,7 +29,7 @@ namespace final.Models
             }
         }
 
-        public static async Task<bool> createBid(ParseObject business, string groupId, double maxUnits, double originalPrice, double priceStep1, double priceStep2, double priceStep3, double priceStep4, double priceStep5, string comments)
+        public static async Task<bool> createBid(ParseObject business, string groupId, double maxUnits, double originalPrice, double priceStep1, double priceStep2, double priceStep3, double priceStep4, double priceStep5, string comments, double guarantee, bool shipping)
         {
             try
             {
@@ -47,6 +47,8 @@ namespace final.Models
                 bidObject[Constants.PRICE_STEP_5] = priceStep5;
                 bidObject[Constants.COMMENTS] = comments;
                 bidObject[Constants.BUSINESS] = business;
+                bidObject[Constants.GUARANTEE] = guarantee;
+                bidObject[Constants.SHIPPING] = shipping;
 
                 Model model = new Model();
                 ParseObject group = await model.retrieveGroup(groupId);

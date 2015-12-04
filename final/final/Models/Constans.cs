@@ -60,6 +60,8 @@ namespace final.Models
         public const string COMMENTS = "comments";
         public const string GROUP_BUYING = "group_buying";
         public const string MAX_UNITS = "max_units";
+        public const string GUARANTEE = "guarantee";
+        public const string SHIPPING = "shipping";
 
 
         //product
