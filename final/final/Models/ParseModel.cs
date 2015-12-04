@@ -34,9 +34,9 @@ namespace final.Models
         {
             return GroupParse.retrieveAllActiveGroups();
         }
-        public void createGroup(ParseObject product)
+        public Task<bool> createGroup(ParseObject product)
         {
-            GroupParse.createGroup(product);
+            return GroupParse.createGroup(product);
 
         }
 
@@ -73,9 +73,9 @@ namespace final.Models
             return BidParse.retrieveGroupOfBid(bid);
         }
 
-        public void createBid(ParseObject business, string groupId, double price, string comments)
+        public Task<bool> createBid(ParseObject business, string groupId, double price, string comments)
         {
-            BidParse.createBid(business, groupId, price, comments);
+            return BidParse.createBid(business, groupId, price, comments);
         }
 
 

@@ -22,7 +22,7 @@ namespace final.Models
         Task<IEnumerable<ParseObject>> retrieveUsersOfGroup(ParseObject group);
         Task<ParseObject> retrieveProductOfGroup(ParseObject group);
         Task<ParseObject> retrieveGroup(string groupId);
-        void createGroup(ParseObject product);
+        Task<bool> createGroup(ParseObject product);
 
         //winning bid
         Task<IEnumerable<ParseObject>> retrieveWinningBids();
@@ -30,7 +30,7 @@ namespace final.Models
 
         //bid
         Task<ParseObject> retrieveGroupOfBid(ParseObject bid);
-        void createBid(ParseObject business, string groupId, double price, string comments);
+        Task<bool> createBid(ParseObject business, string groupId, double price, string comments);
 
         //category
         Task<IEnumerable<ParseObject>> retrieveCategories();

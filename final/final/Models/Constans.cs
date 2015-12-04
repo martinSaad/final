@@ -53,8 +53,7 @@ namespace final.Models
         //bid
         public const string PRICE = "price";
         public const string COMMENTS = "comments";
-        public const string BUSINESS_ID = "business_id";
-        public const string GROUP_BUYING_ID = "group_buying_id";
+        public const string GROUP_BUYING = "group_buying";
 
         //product
         public const string TITLE = "title";

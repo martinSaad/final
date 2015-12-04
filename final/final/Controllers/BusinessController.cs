@@ -99,7 +99,7 @@ namespace final.Controllers
             {
                 ParseObject bid = await model.retrieveBidOfWinningBid(winningBid);
 
-                ParseObject businessOfBid = bid.Get<ParseObject>(Constants.BUSINESS_ID);
+                ParseObject businessOfBid = bid.Get<ParseObject>(Constants.BUSINESS);
 
                 if (businessOfBid.ObjectId == myBusiness.ObjectId)
                 {
@@ -140,7 +140,7 @@ namespace final.Controllers
             double price = Convert.ToDouble(coll[Constants.PRICE]);
             string comments = coll[Constants.COMMENTS];
 
-            model.createBid(myBusiness, groupId, price, comments);
+            await model.createBid(myBusiness, groupId, price, comments);
 
             return View();
         }

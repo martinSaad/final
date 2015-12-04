@@ -57,7 +57,7 @@ namespace final.Controllers
             if (!AlreadyHaveActiveGroupForThisProduct)
             {
                 ParseObject product = await model.retrieveProduct(selectedProduct);
-                model.createGroup(product);
+                await model.createGroup(product);
                 
                 //pass parameters to the GroupPage Action Result (because this function is in the middle)
                 TempData["NewGroupCreated"] = product;

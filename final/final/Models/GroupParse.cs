@@ -64,7 +64,7 @@ namespace final.Models
 
 
 
-        public static async void createGroup(ParseObject product)
+        public static async Task<bool> createGroup(ParseObject product)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace final.Models
                 newGroup[Constants.EXPIRATION_DATE] = DateTime.Now.AddDays(Constants.GROUP_LIFE_TIME);
 
                 await newGroup.SaveAsync();
-
+                return true;
             }
             catch (Exception e)
             {

@@ -54,9 +54,9 @@ namespace final.Models
             return parseModel.retrieveProductOfGroup(group);
         }
 
-        public void createGroup(ParseObject product)
+        public Task<bool> createGroup(ParseObject product)
         {
-            parseModel.createGroup(product);
+            return parseModel.createGroup(product);
 
         }
         public Task<ParseObject> retrieveGroup(string groupId)
@@ -82,9 +82,9 @@ namespace final.Models
             return parseModel.retrieveGroupOfBid(bid);
         }
 
-        public void createBid(ParseObject business, string groupId, double price, string comments)
+        public Task<bool> createBid(ParseObject business, string groupId, double price, string comments)
         {
-            parseModel.createBid(business, groupId, price, comments);
+            return parseModel.createBid(business, groupId, price, comments);
         }
 
 

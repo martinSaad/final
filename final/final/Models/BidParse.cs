@@ -14,7 +14,7 @@ namespace final.Models
             try
             {
                 //minGroup is just to obtain the group objectId
-                ParseObject minGroup = bid.Get<ParseObject>(Constants.GROUP_BUYING_ID);
+                ParseObject minGroup = bid.Get<ParseObject>(Constants.GROUP_BUYING);
 
                 //group is a Pointer in the bid, therefore we need to query him
                 var groupQuery = ParseObject.GetQuery(Constants.GROUP_BUYING_TABLE).WhereEqualTo(Constants.OBJECT_ID, minGroup.ObjectId);
@@ -29,7 +29,7 @@ namespace final.Models
             }
         }
 
-        public static async void createBid(ParseObject business, string groupId, double price, string comments)
+        public static async Task<bool> createBid(ParseObject business, string groupId, double price, string comments)
         {
             try
             {
@@ -39,9 +39,12 @@ namespace final.Models
                 bidObject[Constants.BUSINESS] = business;
 
                 Model model = new Model();
-                ParseObject product = await model.retrieveGroup(groupId);
+                ParseObject group = await model.retrieveGroup(groupId);
+
+                bidObject[Constants.GROUP_BUYING] = group;
 
                 await bidObject.SaveAsync();
+                return true;
             }
             catch (Exception e)
             {
