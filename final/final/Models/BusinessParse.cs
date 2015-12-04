@@ -24,5 +24,20 @@ namespace final.Models
                 throw e;
             }
         }
+
+        public static async Task<ParseObject> retrieveBusiness(string businessId)
+        {
+            try
+            {
+                var businessQuery = ParseObject.GetQuery(Constants.BUSINESS_TABLE).WhereEqualTo(Constants.OBJECT_ID, businessId);
+                ParseObject business = await businessQuery.FirstAsync();
+                return business;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
     }
 }

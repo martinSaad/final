@@ -23,6 +23,12 @@ namespace final.Models
             return parseModel.retrieveMyBusiness();
         }
 
+        public Task<ParseObject> retrieveBusiness(string businessId)
+        {
+            return parseModel.retrieveBusiness(businessId);
+        }
+
+
         //product
         public Task<IEnumerable<ParseObject>> businessesWhoHaveThisProduct(ParseObject product)
         {
@@ -38,6 +44,12 @@ namespace final.Models
             return parseModel.retrieveProduct(productID);
 
         }
+        public Task<IEnumerable<ParseObject>> retrieveAllMyPoducts(string businessId)
+        {
+            return parseModel.retrieveAllMyPoducts(businessId);
+        }
+
+
         //group
         public Task<IEnumerable<ParseObject>> retrieveAllActiveGroups()
         {

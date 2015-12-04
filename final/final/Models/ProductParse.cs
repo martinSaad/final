@@ -42,7 +42,24 @@ namespace final.Models
             }
         }
 
+        public static async Task<IEnumerable<ParseObject>> retrieveAllMyPoducts(string businessId)
+        {
+            try
+            {
+                Model model = new Model();
+                ParseObject business = await model.retrieveBusiness(businessId);
 
+                var relation = business.GetRelation<ParseObject>(Constants.PRODUCTS);
+                IEnumerable<ParseObject> products = await relation.Query.FindAsync();
+
+                return products;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
 
         public static async Task<ParseObject> retrieveProduct(string productID)
         {

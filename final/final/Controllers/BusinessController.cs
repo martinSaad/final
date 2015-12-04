@@ -151,11 +151,21 @@ namespace final.Controllers
 
 
         public async System.Threading.Tasks.Task<ActionResult> MyProducts()
-        { 
+        {
+            ParseObject myBusiness = await model.retrieveMyBusiness();
+            IEnumerable<ParseObject> allMyProducts = await model.retrieveAllMyPoducts(myBusiness.ObjectId);
 
+            List<string> products = new List<string>();
+
+            //extract the title from each product
+            foreach (ParseObject product in allMyProducts)
+            {
+                products.Add(product.Get<string>(Constants.TITLE));
+            }
+
+            ViewBag.products = products;
             return View();
         }
-
-
+        
     }
 }

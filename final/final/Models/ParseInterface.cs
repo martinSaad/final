@@ -11,11 +11,15 @@ namespace final.Models
     {
         //business
         Task<ParseObject> retrieveMyBusiness();
+        Task<ParseObject> retrieveBusiness(string businessId);
+
 
         //product
         Task<IEnumerable<ParseObject>> businessesWhoHaveThisProduct(ParseObject product);
         Task<IEnumerable<ParseObject>> retrieveAllProducts();
         Task<ParseObject> retrieveProduct(string productID);
+        Task<IEnumerable<ParseObject>> retrieveAllMyPoducts(string businessId);
+
 
         //group
         Task<IEnumerable<ParseObject>> retrieveAllActiveGroups();
