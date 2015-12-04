@@ -3,7 +3,7 @@
     ViewBag.Title = "MyActiveGroups";
     int i = 0;
     List<string> comments = ViewBag.comments;
-    List<int> prices = ViewBag.prices;
+    List<int> originalPrices = ViewBag.originalPrices;
     List<int> users = ViewBag.users;
 }
 
@@ -25,7 +25,7 @@
             </td>
 
             <td>
-                @prices.ElementAt(i)
+                @originalPrices.ElementAt(i)
             </td>
             <td>
                 @comments.ElementAt(i)

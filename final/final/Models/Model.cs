@@ -94,9 +94,9 @@ namespace final.Models
             return parseModel.retrieveGroupOfBid(bid);
         }
 
-        public Task<bool> createBid(ParseObject business, string groupId, double price, string comments)
+        public Task<bool> createBid(ParseObject business, string groupId, double maxUnits, double originalPrice, double priceStep1, double priceStep2, double priceStep3, double priceStep4, double priceStep5, string comments)
         {
-            return parseModel.createBid(business, groupId, price, comments);
+            return parseModel.createBid(business, groupId, maxUnits, originalPrice, priceStep1, priceStep2, priceStep3, priceStep4, priceStep5, comments);
         }
 
 

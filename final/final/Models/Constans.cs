@@ -51,9 +51,16 @@ namespace final.Models
         public const string PRODUCTS = "products";
 
         //bid
-        public const string PRICE = "price";
+        public const string PRICE_STEP_1 = "price_step_1";
+        public const string PRICE_STEP_2 = "price_step_2";
+        public const string PRICE_STEP_3 = "price_step_3";
+        public const string PRICE_STEP_4 = "price_step_4";
+        public const string PRICE_STEP_5 = "price_step_5";
+        public const string ORIGINAL_PRICE = "original_price";
         public const string COMMENTS = "comments";
         public const string GROUP_BUYING = "group_buying";
+        public const string MAX_UNITS = "max_units";
+
 
         //product
         public const string TITLE = "title";

@@ -29,12 +29,22 @@ namespace final.Models
             }
         }
 
-        public static async Task<bool> createBid(ParseObject business, string groupId, double price, string comments)
+        public static async Task<bool> createBid(ParseObject business, string groupId, double maxUnits, double originalPrice, double priceStep1, double priceStep2, double priceStep3, double priceStep4, double priceStep5, string comments)
         {
             try
             {
                 var bidObject = new ParseObject(Constants.BID_TABLE);
-                bidObject[Constants.PRICE] = price;
+
+                //TODO: check max units - between 10-50
+                bidObject[Constants.MAX_UNITS] = maxUnits;
+
+
+                bidObject[Constants.ORIGINAL_PRICE] = originalPrice;
+                bidObject[Constants.PRICE_STEP_1] = priceStep1;
+                bidObject[Constants.PRICE_STEP_2] = priceStep2;
+                bidObject[Constants.PRICE_STEP_3] = priceStep3;
+                bidObject[Constants.PRICE_STEP_4] = priceStep4;
+                bidObject[Constants.PRICE_STEP_5] = priceStep5;
                 bidObject[Constants.COMMENTS] = comments;
                 bidObject[Constants.BUSINESS] = business;
 

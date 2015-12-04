@@ -86,7 +86,7 @@ namespace final.Controllers
         //return a list of groups that the current business "won".
         public async System.Threading.Tasks.Task<ActionResult> MyActiveGroups()
         {
-            List<int> prices = new List<int>(); //return value
+            List<int> originalPrices = new List<int>(); //return value
             List<string> comments = new List<string>(); //return value
             List<ParseObject> groups = new List<ParseObject>(); //return value
             List<int> users = new List<int>(); //return value
@@ -103,7 +103,7 @@ namespace final.Controllers
 
                 if (businessOfBid.ObjectId == myBusiness.ObjectId)
                 {
-                    int price = bid.Get<int>(Constants.PRICE);
+                    int originalPrice = bid.Get<int>(Constants.ORIGINAL_PRICE);
                     string comment = bid.Get<string>(Constants.COMMENTS);
 
                     ParseObject group = await model.retrieveGroupOfBid(bid);
@@ -112,13 +112,13 @@ namespace final.Controllers
                     IEnumerable<ParseObject> groupUsers = await model.retrieveUsersOfGroup(group);
 
                     users.Add(groupUsers.Count());
-                    prices.Add(price);
+                    originalPrices.Add(originalPrice);
                     comments.Add(comment);
                     groups.Add(group);
                 }
             }
             ViewBag.groups = groups;
-            ViewBag.prices = prices;
+            ViewBag.originalPrices = originalPrices;
             ViewBag.comments = comments;
             ViewBag.users = users;
 
@@ -137,10 +137,16 @@ namespace final.Controllers
         {
             ParseObject myBusiness = await model.retrieveMyBusiness();
             string groupId = (string)TempData["groupId"];
-            double price = Convert.ToDouble(coll[Constants.PRICE]);
+            double maxUints = Convert.ToDouble(coll[Constants.MAX_UNITS]);
+            double originalPrice = Convert.ToDouble(coll[Constants.ORIGINAL_PRICE]);
+            double priceStep1 = Convert.ToDouble(coll[Constants.PRICE_STEP_1]);
+            double priceStep2 = Convert.ToDouble(coll[Constants.PRICE_STEP_2]);
+            double priceStep3 = Convert.ToDouble(coll[Constants.PRICE_STEP_3]);
+            double priceStep4 = Convert.ToDouble(coll[Constants.PRICE_STEP_4]);
+            double priceStep5 = Convert.ToDouble(coll[Constants.PRICE_STEP_5]);
             string comments = coll[Constants.COMMENTS];
 
-            await model.createBid(myBusiness, groupId, price, comments);
+            await model.createBid(myBusiness, groupId, maxUints, originalPrice, priceStep1, priceStep2, priceStep3, priceStep4, priceStep5, comments);
 
             return View();
         }
