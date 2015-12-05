@@ -2,9 +2,12 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+<div class="jumbotron" style="direction:rtl;">
     <h1>קבוצות פעילות</h1>
-    <p class="lead">כאן תופיע רשימה של קבוצות פעילות בקרוב</p>
+    @foreach (var group in ViewBag.allGroups)
+    {
+        <p>קבוצה פעילה למוצר: @group.ObjectId </p>
+    }
 </div>
 
 <div class="row">

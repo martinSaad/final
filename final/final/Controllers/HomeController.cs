@@ -1,4 +1,6 @@
-﻿using System;
+﻿using final.Models;
+using Parse;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +10,20 @@ namespace final.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        Model model = new Model();
+        public async System.Threading.Tasks.Task<ActionResult> Index()
         {
+            List<ParseObject> groups = new List<ParseObject>(); //return value
+            IEnumerable<ParseObject> allGroups = await model.retrieveAllActiveGroups();
+            /*List<string> groupsForProducts = new List<string>();
+            foreach (var group in allGroups)
+            {
+                groupsNames.Add(group.Get<string>(Constants.NAME));
+            }*/
+
+
+            //ViewBag.groupsNames = groupsNames;
+            ViewBag.allGroups = allGroups;
             return View();
         }
 

@@ -13,6 +13,8 @@ namespace final.Controllers
     {
         Model model = new Model();
         // GET: Group
+
+        [Authorize]
         public async System.Threading.Tasks.Task<ActionResult> CreateGroup()
         {
 
@@ -20,18 +22,33 @@ namespace final.Controllers
             IEnumerable<ParseObject> categories = await model.retrieveCategories();
             IEnumerable<ParseObject> subCategories = await model.retrieveSubCategories();
             IEnumerable<ParseObject> products = await model.retrieveAllProducts();
-            
 
+            //Names of products, categories and subcategories. Will move to parse controller...
+            List<string> productsNames = new List<string>();
+            List<string> categoriesNames = new List<string>();
+            List<string> subCategoriesNames = new List<string>();
+            foreach (ParseObject c in categories)
+                categoriesNames.Add(c.Get<string>(Constants.NAME));
+            foreach (ParseObject sc in subCategories)
+                subCategoriesNames.Add(sc.Get<string>(Constants.NAME));
+            foreach (ParseObject p in products)
+                productsNames.Add(p.Get<string>(Constants.TITLE));
+            
+            
             //ViewBags sent to the view
             ViewBag.Categories = categories;
             ViewBag.SubCategories = subCategories;
             ViewBag.Products = products;
+            ViewBag.ProductsNames = productsNames;
+            ViewBag.CategoriesNames = categoriesNames;
+            ViewBag.SubCategoriesNames = subCategoriesNames;
+
 
             return View();
         }
 
-        
 
+        [Authorize]
         public async System.Threading.Tasks.Task<ActionResult> OpenGroup(FormCollection coll)
         {
             TempData["NewGroupCreated"] = null;
@@ -74,7 +91,7 @@ namespace final.Controllers
             return RedirectToAction("GroupPage");
         }
 
-
+        [Authorize]
         public ActionResult GroupPage()
         {
             ViewBag.Product = TempData["Product"];
