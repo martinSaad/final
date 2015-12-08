@@ -65,5 +65,60 @@ namespace final.Models
             }
         }
 
+        public static async Task<IEnumerable<ParseObject>> retrieveBids(string groupId)
+        {
+            try
+            {
+                var bidsQuery = ParseObject.GetQuery(Constants.BID_TABLE).WhereEqualTo(Constants.GROUP_BUYING, groupId);
+                IEnumerable<ParseObject> bids = await bidsQuery.FindAsync();
+
+                return bids;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }       
+        }
+
+        public static double getPriceStep1(ParseObject bid)
+        {
+            return bid.Get<double>(Constants.PRICE_STEP_1);
+        }
+        public static double getPriceStep2(ParseObject bid)
+        {
+            return bid.Get<double>(Constants.PRICE_STEP_2);
+        }
+        public static double getPriceStep3(ParseObject bid)
+        {
+            return bid.Get<double>(Constants.PRICE_STEP_3);
+        }
+        public static double getPriceStep4(ParseObject bid)
+        {
+            return bid.Get<double>(Constants.PRICE_STEP_4);
+        }
+        public static double getPriceStep5(ParseObject bid)
+        {
+            return bid.Get<double>(Constants.PRICE_STEP_5);
+        }
+        public static double getGuarantee(ParseObject bid)
+        {
+            return bid.Get<double>(Constants.GUARANTEE);
+        }
+        public static double getOriginalPrice(ParseObject bid)
+        {
+            return bid.Get<double>(Constants.ORIGINAL_PRICE);
+        }
+        public static double getMaxUints(ParseObject bid)
+        {
+            return bid.Get<double>(Constants.MAX_UNITS);
+        }
+        public static bool getShipping(ParseObject bid)
+        {
+            return bid.Get<bool>(Constants.SHIPPING);
+
+        }
+
+
     }
 }

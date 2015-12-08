@@ -69,7 +69,7 @@ namespace final.Controllers
                         //if there is time to offer
                         if (timeToOfferABid != TimeSpan.Zero)
                         {
-                            products.Add(product.Get<string>(Constants.TITLE));
+                            products.Add(model.getProductTitle(product));
                             groups.Add(group);
                             timeToOffer.Add(timeToOfferABid);
                         }
@@ -95,6 +95,7 @@ namespace final.Controllers
 
             IEnumerable<ParseObject> winningBids = await model.retrieveWinningBids();
 
+            //check if the winnign bid is my bid (from my business)
             foreach (ParseObject winningBid in winningBids)
             {
                 ParseObject bid = await model.retrieveBidOfWinningBid(winningBid);
@@ -126,37 +127,6 @@ namespace final.Controllers
         }
 
 
-        public ActionResult CreateBidLink(string groupId)
-        {
-           // ParseObject product = model.retrieveProduct(productId);
-            TempData["groupId"] = groupId;
-            return View();
-        }
-
-        public async System.Threading.Tasks.Task<ActionResult> CreateBid(FormCollection coll)
-        {
-            ParseObject myBusiness = await model.retrieveMyBusiness();
-            string groupId = (string)TempData["groupId"];
-            double maxUints = Convert.ToDouble(coll[Constants.MAX_UNITS]);
-            double originalPrice = Convert.ToDouble(coll[Constants.ORIGINAL_PRICE]);
-            double priceStep1 = Convert.ToDouble(coll[Constants.PRICE_STEP_1]);
-            double priceStep2 = Convert.ToDouble(coll[Constants.PRICE_STEP_2]);
-            double priceStep3 = Convert.ToDouble(coll[Constants.PRICE_STEP_3]);
-            double priceStep4 = Convert.ToDouble(coll[Constants.PRICE_STEP_4]);
-            double priceStep5 = Convert.ToDouble(coll[Constants.PRICE_STEP_5]);
-            string comments = coll[Constants.COMMENTS];
-            double guarantee = Convert.ToDouble(coll[Constants.GUARANTEE]);
-            bool shipping = Convert.ToBoolean(coll[Constants.SHIPPING]);
-            await model.createBid(myBusiness, groupId, maxUints, originalPrice, priceStep1, priceStep2, priceStep3, priceStep4, priceStep5, comments, guarantee, shipping);
-
-            return View();
-        }
-
-
-
-
-
-
         public async System.Threading.Tasks.Task<ActionResult> MyProducts()
         {
             ParseObject myBusiness = await model.retrieveMyBusiness();
@@ -167,12 +137,59 @@ namespace final.Controllers
             //extract the title from each product
             foreach (ParseObject product in allMyProducts)
             {
-                products.Add(product.Get<string>(Constants.TITLE));
+                products.Add(model.getProductTitle(product));
             }
 
             ViewBag.products = products;
             return View();
         }
-        
+
+        public async System.Threading.Tasks.Task<ActionResult> AddProductLink()
+        {
+
+            //Query for the select Lists of Category, SubCategory & Product
+            IEnumerable<ParseObject> categories = await model.retrieveCategories();
+            IEnumerable<ParseObject> subCategories = await model.retrieveSubCategories();
+            IEnumerable<ParseObject> products = await model.retrieveAllProducts();
+
+            //Names of products, categories and subcategories. Will move to parse controller...
+            List<string> productsNames = new List<string>();
+            List<string> categoriesNames = new List<string>();
+            List<string> subCategoriesNames = new List<string>();
+            foreach (ParseObject c in categories)
+                categoriesNames.Add(c.Get<string>(Constants.NAME));
+            foreach (ParseObject sc in subCategories)
+                subCategoriesNames.Add(sc.Get<string>(Constants.NAME));
+            foreach (ParseObject p in products)
+                productsNames.Add(p.Get<string>(Constants.TITLE));
+
+
+            //ViewBags sent to the view
+            ViewBag.Categories = categories;
+            ViewBag.SubCategories = subCategories;
+            ViewBag.Products = products;
+            ViewBag.ProductsNames = productsNames;
+            ViewBag.CategoriesNames = categoriesNames;
+            ViewBag.SubCategoriesNames = subCategoriesNames;
+
+            return View();
+        }
+
+        public async System.Threading.Tasks.Task<ActionResult> AddProductToBusiness(FormCollection coll)
+        {
+            TempData["NewGroupCreated"] = null;
+
+            //User wants to open new group of those parameters:
+            string selectedCategory = coll[Constants.CATEGORY_ID];
+            string selectedSubCategory = coll[Constants.SUB_CATEGORY_ID];
+            string selectedProduct = coll[Constants.PRODUCT_ID];
+
+            ParseObject myBusiness = await model.retrieveMyBusiness();
+
+            await model.addProductToBusiness(selectedProduct, myBusiness.ObjectId);
+            return View("myProducts");
+        }
+
+
+        }
     }
-}

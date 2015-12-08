@@ -77,5 +77,10 @@ namespace final.Models
                 throw e;
             }
         }
+
+        public static string getProductTitle(ParseObject product)
+        {
+            return product.Get<string>(Constants.TITLE);
+        }
     }
 }

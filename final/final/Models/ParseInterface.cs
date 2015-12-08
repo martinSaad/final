@@ -12,13 +12,14 @@ namespace final.Models
         //business
         Task<ParseObject> retrieveMyBusiness();
         Task<ParseObject> retrieveBusiness(string businessId);
-
+        Task<bool> addProductToBusiness(string productId, string businessId);
 
         //product
         Task<IEnumerable<ParseObject>> businessesWhoHaveThisProduct(ParseObject product);
         Task<IEnumerable<ParseObject>> retrieveAllProducts();
         Task<ParseObject> retrieveProduct(string productID);
         Task<IEnumerable<ParseObject>> retrieveAllMyPoducts(string businessId);
+        string getProductTitle(ParseObject product);
 
 
         //group
@@ -31,10 +32,23 @@ namespace final.Models
         //winning bid
         Task<IEnumerable<ParseObject>> retrieveWinningBids();
         Task<ParseObject> retrieveBidOfWinningBid(ParseObject winningBid);
+        Task<bool> createWinningBid(ParseObject bid);
 
         //bid
         Task<ParseObject> retrieveGroupOfBid(ParseObject bid);
         Task<bool> createBid(ParseObject business, string groupId, double maxUnits, double originalPrice, double priceStep1, double priceStep2, double priceStep3, double priceStep4, double priceStep5, string comments, double guarantee, bool shipping);
+        Task<IEnumerable<ParseObject>> retrieveBids(string groupId);
+        double getPriceStep1(ParseObject bid);
+        double getPriceStep2(ParseObject bid);
+        double getPriceStep3(ParseObject bid);
+        double getPriceStep4(ParseObject bid);
+        double getPriceStep5(ParseObject bid);
+        double getGuarantee(ParseObject bid);
+        double getOriginalPrice(ParseObject bid);
+        double getMaxUints(ParseObject bid);
+        bool getShipping(ParseObject bid);
+
+
 
         //category
         Task<IEnumerable<ParseObject>> retrieveCategories();

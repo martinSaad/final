@@ -8,7 +8,16 @@ namespace final.Models
     public static class Constants
     {
         public const int MAX_TIME_GRPUO_OFFER = 24; //hours
-        public const double GROUP_LIFE_TIME = 4.0;
+        public const double GROUP_LIFE_TIME = 4.0; //days
+
+        //winning bid calulation (in %)
+        public const double CALCULATION_STEPS_DIFFERENCE = 0.5;
+        public const double CALCULATION_LOWEST_PRICE = 0.25;
+        public const double CALCULATION_STARTING_PRICE = 0.15;
+        public const double CALCULATION_DELIVERY_CAPABILITY = 0.05;
+        public const double CALCULATION_SHIPPING_CAPABILITY = 0.025;
+        public const double CALCULATION_GUARANTEE_CAPABILITY = 0.025;
+        public const double CALCULATION_BUSINESS_REVIEWS = 0;
 
         //tables
         public const string OBJECT_ID = "objectId";

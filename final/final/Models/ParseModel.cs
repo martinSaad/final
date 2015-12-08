@@ -20,6 +20,12 @@ namespace final.Models
             return BusinessParse.retrieveBusiness(businessId);
         }
 
+        public Task<bool> addProductToBusiness(string productId, string businessId)
+        {
+            return BusinessParse.addProductToBusiness(productId, businessId);
+        }
+
+
 
         //product
         public Task<IEnumerable<ParseObject>> businessesWhoHaveThisProduct(ParseObject product)
@@ -37,6 +43,10 @@ namespace final.Models
         public Task<IEnumerable<ParseObject>> retrieveAllMyPoducts(string businessId)
         {
             return ProductParse.retrieveAllMyPoducts(businessId);
+        }
+        public string getProductTitle(ParseObject product)
+        {
+            return ProductParse.getProductTitle(product);
         }
 
 
@@ -78,6 +88,12 @@ namespace final.Models
             return WinningBidParse.retrieveBidOfWinningBid(winningBid);
         }
 
+        public Task<bool> createWinningBid(ParseObject bid)
+        {
+            return WinningBidParse.createWinningBid(bid);
+        }
+
+
         //bid
         public Task<ParseObject> retrieveGroupOfBid(ParseObject bid)
         {
@@ -88,6 +104,56 @@ namespace final.Models
         {
             return BidParse.createBid(business, groupId, maxUnits, originalPrice, priceStep1, priceStep2, priceStep3, priceStep4, priceStep5, comments, guarantee, shipping);
         }
+        public Task<IEnumerable<ParseObject>> retrieveBids(string groupId)
+        {
+            return BidParse.retrieveBids(groupId);
+        }
+
+        public double getPriceStep1(ParseObject bid)
+        {
+            return BidParse.getPriceStep1(bid);
+        }
+
+        public double getPriceStep2(ParseObject bid)
+        {
+            return BidParse.getPriceStep2(bid);
+        }
+
+        public double getPriceStep3(ParseObject bid)
+        {
+            return BidParse.getPriceStep3(bid);
+        }
+
+        public double getPriceStep4(ParseObject bid)
+        {
+            return BidParse.getPriceStep5(bid);
+        }
+
+        public double getPriceStep5(ParseObject bid)
+        {
+            return BidParse.getPriceStep5(bid);
+        }
+
+        public double getGuarantee(ParseObject bid)
+        {
+            return BidParse.getGuarantee(bid);
+        }
+
+        public double getOriginalPrice(ParseObject bid)
+        {
+            return BidParse.getOriginalPrice(bid);
+        }
+
+        public double getMaxUints(ParseObject bid)
+        {
+            return BidParse.getMaxUints(bid);
+        }
+
+        public bool getShipping(ParseObject bid)
+        {
+            return BidParse.getShipping(bid);
+        }
+
 
 
         //category
@@ -101,6 +167,5 @@ namespace final.Models
         {
             return SubCategoryParse.retrieveSubCategory();
         }
-
     }
 }

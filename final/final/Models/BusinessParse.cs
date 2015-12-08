@@ -39,5 +39,21 @@ namespace final.Models
                 throw e;
             }
         }
+
+        public static async Task<bool> addProductToBusiness(string productId, string businessId)
+        {
+            try
+            {
+                ParseObject business = await retrieveBusiness(businessId);
+
+                //TODO: REST API
+                return true; 
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
     }
 }

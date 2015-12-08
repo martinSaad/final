@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "CreateGroup";
+    List<string> productsNames = ViewBag.ProductsNames;
+    List<string> categoriesNames = ViewBag.CategoriesNames;
+    List<string> subCategoriesNames = ViewBag.SubCategoriesNames;
+    int productsNamesIndex = 0, categoriesNamesIndex = 0, subCategoriesNamesIndex = 0;
+
+}
+<h2>יצירת קבוצה</h2>
+
+<br /><br />
+<div style="float:right; direction:rtl;">
+    @using (Html.BeginForm("AddProductToBusiness", "Business", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            קטגוריה
+            <div class="col-md-9">
+                <select name="CategoryID" style="width: 200px;">
+                    <option value="0">ללא</option>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.ObjectId">@categoriesNames[categoriesNamesIndex]</option>
+                        categoriesNamesIndex++;
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            תת-קטגוריה
+            <div class="col-md-9">
+                <select name="SubCategoryID" style="width: 200px;">
+                    <option value="0">ללא</option>
+                    @foreach (var subcategory in ViewBag.SubCategories)
+                    {
+                        <option value="@subcategory.ObjectId">@subCategoriesNames[subCategoriesNamesIndex]</option>
+                        subCategoriesNamesIndex++;
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            מוצר
+            <div class="col-md-9">
+                <select name="ProductID" style="width: 200px;">
+                    <option value="0">ללא</option>
+                    @foreach (var product in ViewBag.Products)
+                    {
+                        <option value="@product.ObjectId">@productsNames[productsNamesIndex]</option>
+                        productsNamesIndex++;
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="יצירה" />
+            </div>
+        </div>
+    }
+
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

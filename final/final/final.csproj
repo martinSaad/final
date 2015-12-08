@@ -180,6 +180,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BidController.cs" />
     <Compile Include="Controllers\BusinessController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -263,12 +264,13 @@
     <Content Include="Views\Business\Login.cshtml" />
     <Content Include="Views\Business\Dashboard.cshtml" />
     <Content Include="Views\Business\GroupsWitingForBid.cshtml" />
-    <Content Include="Views\Business\CreateBidLink.cshtml" />
+    <Content Include="Views\Bid\CreateBidLink.cshtml" />
     <Content Include="Views\Business\MyActiveGroups.cshtml" />
     <Content Include="Views\Business\MyProducts.cshtml" />
     <Content Include="Views\Group\GroupPage.cshtml" />
     <Content Include="Views\Group\Group.cshtml" />
-    <Content Include="Views\Business\CreateBid.cshtml" />
+    <Content Include="Views\Bid\CreateBid.cshtml" />
+    <Content Include="Views\Business\AddProductLink.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

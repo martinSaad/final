@@ -39,5 +39,23 @@ namespace final.Models
                 throw e;
             }
         }
+
+        public static async Task<bool> createWinningBid(ParseObject bid)
+        {
+            try
+            {
+                ParseObject winningBid = new ParseObject(Constants.WINNING_BID_TABLE);
+                winningBid[Constants.BID] = bid;
+
+                await winningBid.SaveAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
+
     }
 }
