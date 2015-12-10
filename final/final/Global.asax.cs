@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Parse;
 using System.IO;
+using final.Models;
 
 namespace final
 {
@@ -21,7 +22,7 @@ namespace final
 
 
             //Parse initialization
-            ParseClient.Initialize("GqwWATRcgsMvZxDSlkoOqadSKJoCWgOS3jna63qd", "zje7QWmHHA4lLaVFYll64mBxD7KxXiW6n5cRbqui");
+            ParseClient.Initialize(Constants.APPLICATION_ID, Constants.PARSE_CODE);
             ParseFacebookUtils.Initialize("1513033632350091");
 
             //log4net init

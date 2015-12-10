@@ -10,6 +10,16 @@ namespace final.Models
         public const int MAX_TIME_GRPUO_OFFER = 24; //hours
         public const double GROUP_LIFE_TIME = 4.0; //days
 
+        //parse credentials
+        public const string APPLICATION_ID = "GqwWATRcgsMvZxDSlkoOqadSKJoCWgOS3jna63qd";
+        public const string PARSE_CODE = "zje7QWmHHA4lLaVFYll64mBxD7KxXiW6n5cRbqui";
+        public const string API_KEY = "DsyqRVAqe4OXTDfyjhRYjOF2GHXJ8vNoaT0Cmvyk";
+
+        //parse REST API
+        public const string PARSE_URL = "https://api.parse.com/1/classes";
+        public const string PARSE_HEADER_APPLICATION_ID = "X-Parse-Application-Id";
+        public const string PARSE_HEADER_API_KEY = "X-Parse-REST-API-Key";
+
         //winning bid calulation (in %)
         public const double CALCULATION_STEPS_DIFFERENCE = 0.5;
         public const double CALCULATION_LOWEST_PRICE = 0.25;

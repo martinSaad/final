@@ -44,9 +44,10 @@ namespace final.Models
         {
             try
             {
-                ParseObject business = await retrieveBusiness(businessId);
+               // ParseObject business = await retrieveBusiness(businessId);
 
                 //TODO: REST API
+                PutRequest.makeRequest(Constants.BUSINESS_TABLE, businessId, "_User", Constants.PRODUCT_TABLE, productId);
                 return true; 
             }
             catch (Exception e)
