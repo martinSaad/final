@@ -1,12 +1,15 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    List<string> activeGroupsNames = ViewBag.allActiveGroupsNames;
+    int productNameIndex = 0;
 }
 
 <div class="jumbotron" style="direction:rtl;">
     <h1>קבוצות פעילות</h1>
-    @foreach (var group in ViewBag.allGroups)
+    @foreach (var group in ViewBag.allActiveGroups)
     {
-        <p>קבוצה פעילה למוצר: @group.ObjectId </p>
+        <p>קבוצה פעילה למוצר: @Html.ActionLink(activeGroupsNames[productNameIndex], "Group" , "Group", new { groupId = group.ObjectId }, null) </p>
+        productNameIndex++;
     }
 </div>
 

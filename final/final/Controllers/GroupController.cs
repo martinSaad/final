@@ -14,7 +14,9 @@ namespace final.Controllers
         Model model = new Model();
         // GET: Group
 
-        [Authorize]
+
+        //create group page - return the values of the select lists in create group view
+        //[Authorize]
         public async System.Threading.Tasks.Task<ActionResult> CreateGroup()
         {
 
@@ -23,16 +25,16 @@ namespace final.Controllers
             IEnumerable<ParseObject> subCategories = await model.retrieveSubCategories();
             IEnumerable<ParseObject> products = await model.retrieveAllProducts();
 
-            //Names of products, categories and subcategories. Will move to parse controller...
+            //Names of products, categories and subcategories
             List<string> productsNames = new List<string>();
             List<string> categoriesNames = new List<string>();
             List<string> subCategoriesNames = new List<string>();
-            foreach (ParseObject c in categories)
-                categoriesNames.Add(c.Get<string>(Constants.NAME));
-            foreach (ParseObject sc in subCategories)
-                subCategoriesNames.Add(sc.Get<string>(Constants.NAME));
-            foreach (ParseObject p in products)
-                productsNames.Add(p.Get<string>(Constants.TITLE));
+            foreach (ParseObject category in categories)
+                categoriesNames.Add(model.getCategoryName(category));
+            foreach (ParseObject subCategory in subCategories)
+                subCategoriesNames.Add(model.getSubCategoryName(subCategory));
+            foreach (ParseObject product in products)
+                productsNames.Add(model.getProductTitle(product));
             
             
             //ViewBags sent to the view
@@ -48,7 +50,8 @@ namespace final.Controllers
         }
 
 
-        [Authorize]
+
+        //[Authorize]
         public async System.Threading.Tasks.Task<ActionResult> OpenGroup(FormCollection coll)
         {
             TempData["NewGroupCreated"] = null;
@@ -62,23 +65,19 @@ namespace final.Controllers
             //check if we have active group for the same product
             bool AlreadyHaveActiveGroupForThisProduct = false;
             IEnumerable<ParseObject> groups = await model.retrieveAllActiveGroups();
-            foreach (ParseObject group in groups)
-            {
-                ParseObject product = group.Get<ParseObject>(Constants.PRODUCT);
+            foreach (ParseObject group in groups){
+                ParseObject product = await model.retrieveProductOfGroup(group);
                 if (product.ObjectId == selectedProduct)
                     AlreadyHaveActiveGroupForThisProduct = true;
             }
-
-
+            
             //if we don't have active group right now of this product, lets create a new one!
-            if (!AlreadyHaveActiveGroupForThisProduct)
-            {
+            if (!AlreadyHaveActiveGroupForThisProduct){
                 ParseObject product = await model.retrieveProduct(selectedProduct);
                 await model.createGroup(product);
                 
                 //pass parameters to the GroupPage Action Result (because this function is in the middle)
-                TempData["NewGroupCreated"] = product;
-                
+                TempData["NewGroupCreated"] = product;    
             }
 
 
@@ -91,7 +90,7 @@ namespace final.Controllers
             return RedirectToAction("GroupPage");
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult GroupPage()
         {
             ViewBag.Product = TempData["Product"];
@@ -106,9 +105,14 @@ namespace final.Controllers
         }
 
 
-
-        public ActionResult Group()
+        //The group Page
+        public async Task<ActionResult> Group(string groupId)
         {
+            ParseObject group = await model.retrieveGroup(groupId);
+            
+
+
+
             return View();
         }
 
@@ -118,7 +122,7 @@ namespace final.Controllers
 
 
 
-
+/*
         public async void newGroupCreated(string ObjectId)
         {
             //notify relevant bussiness In Email by product type
@@ -129,7 +133,7 @@ namespace final.Controllers
 
 
         }
-
+        */
     }
 }
 

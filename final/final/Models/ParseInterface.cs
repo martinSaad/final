@@ -52,9 +52,11 @@ namespace final.Models
 
         //category
         Task<IEnumerable<ParseObject>> retrieveCategories();
+        string getCategoryName(ParseObject category);
 
         //subcategory
         Task<IEnumerable<ParseObject>> retrieveSubCategories();
+        string getSubCategoryName(ParseObject subCategory);
 
     }
 

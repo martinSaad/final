@@ -24,5 +24,11 @@ namespace final.Models
                 throw e;
             }
         }
+
+        public static string getSubCategoryName(ParseObject subCategory)
+        {
+            return subCategory.Get<string>(Constants.NAME);
+        }
+
     }
 }

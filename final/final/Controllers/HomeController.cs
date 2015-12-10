@@ -14,16 +14,19 @@ namespace final.Controllers
         public async System.Threading.Tasks.Task<ActionResult> Index()
         {
             List<ParseObject> groups = new List<ParseObject>(); //return value
-            IEnumerable<ParseObject> allGroups = await model.retrieveAllActiveGroups();
-            /*List<string> groupsForProducts = new List<string>();
-            foreach (var group in allGroups)
+            IEnumerable<ParseObject> allActiveGroups = await model.retrieveAllActiveGroups();
+            List<string> allActiveGroupsNames = new List<string>();
+            foreach (ParseObject group in allActiveGroups)
             {
-                groupsNames.Add(group.Get<string>(Constants.NAME));
-            }*/
-
+                ParseObject productOfGroup = group.Get<ParseObject>(Constants.PRODUCT);
+                ParseObject product = await model.retrieveProduct(productOfGroup.ObjectId);
+                allActiveGroupsNames.Add(product.Get<string>(Constants.TITLE));
+            }    
+            
 
             //ViewBag.groupsNames = groupsNames;
-            ViewBag.allGroups = allGroups;
+            ViewBag.allActiveGroups = allActiveGroups;
+            ViewBag.allActiveGroupsNames = allActiveGroupsNames;
             return View();
         }
 
@@ -36,6 +39,7 @@ namespace final.Controllers
 
         public ActionResult Contact()
         {
+
             ViewBag.Message = "Your contact page.";
 
             return View();

@@ -162,10 +162,20 @@ namespace final.Models
             return CategoryParse.retrieveCategory();
         }
 
+        public string getCategoryName(ParseObject category)
+        {
+            return CategoryParse.getCategoryName(category);
+        }
+
         //sub category
         public Task<IEnumerable<ParseObject>> retrieveSubCategories()
         {
             return SubCategoryParse.retrieveSubCategory();
+        }
+
+        public string getSubCategoryName(ParseObject subCategory)
+        {
+            return SubCategoryParse.getSubCategoryName(subCategory);
         }
     }
 }

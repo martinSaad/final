@@ -168,12 +168,20 @@ namespace final.Models
         {
             return parseModel.retrieveCategories();
         }
+        public string getCategoryName(ParseObject category)
+        {
+            return parseModel.getCategoryName(category);
+        }
 
 
         //sub categories
         public Task<IEnumerable<ParseObject>> retrieveSubCategories()
         {
             return parseModel.retrieveSubCategories();
+        }
+        public string getSubCategoryName(ParseObject subCategory)
+        {
+            return parseModel.getSubCategoryName(subCategory);
         }
     }
 }
