@@ -1,11 +1,13 @@
 ﻿@{
     ViewBag.Title = "Group";
+    string customFmts = "d MMM yyyy";
+    DateTime time = ViewBag.ExpirationDate;
 }
 
 
 <div style="direction:rtl;">
 
-    <h2>דף הקבוצה</h2>
+    <h2>קבוצת רכישה למוצר @ViewBag.ProductName</h2>
 
     <h4> פרטי המוצר</h4>
 
@@ -18,8 +20,10 @@
 
 
     <br /><br />
-    <h4>זמן נותר</h4>
+    <h4><u> הקבוצה פתוחה רק עד:</u> @time.ToString(customFmts) </h4>
 
+
+    <h4> @Html.ActionLink("אני רוצה להצטרף לקבוצה!", "JoinGroup", "Group")</h4>
 
 
 

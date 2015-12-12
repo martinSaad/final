@@ -192,5 +192,10 @@ namespace final.Models
         {
             return parseModel.getSubCategoryName(subCategory);
         }
+        public Task<ParseObject> retrieveActiveGroupForProduct(string productId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

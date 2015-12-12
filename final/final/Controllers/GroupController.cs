@@ -16,7 +16,7 @@ namespace final.Controllers
 
 
         //create group page - return the values of the select lists in create group view
-        //[Authorize]
+        [Authorize]
         public async System.Threading.Tasks.Task<ActionResult> CreateGroup()
         {
 
@@ -51,10 +51,11 @@ namespace final.Controllers
 
 
 
-        //[Authorize]
+        [Authorize]
         public async System.Threading.Tasks.Task<ActionResult> OpenGroup(FormCollection coll)
         {
             TempData["NewGroupCreated"] = null;
+            string groupId;
 
             //User wants to open new group of those parameters:
             string selectedCategory = coll[Constants.CATEGORY_ID];
@@ -67,14 +68,17 @@ namespace final.Controllers
             IEnumerable<ParseObject> groups = await model.retrieveAllActiveGroups();
             foreach (ParseObject group in groups){
                 ParseObject product = await model.retrieveProductOfGroup(group);
-                if (product.ObjectId == selectedProduct)
+                if (product.ObjectId == selectedProduct) { 
                     AlreadyHaveActiveGroupForThisProduct = true;
+                    groupId = group.ObjectId;
+                }
             }
             
             //if we don't have active group right now of this product, lets create a new one!
             if (!AlreadyHaveActiveGroupForThisProduct){
                 ParseObject product = await model.retrieveProduct(selectedProduct);
                 await model.createGroup(product);
+                
                 
                 //pass parameters to the GroupPage Action Result (because this function is in the middle)
                 TempData["NewGroupCreated"] = product;    
@@ -90,7 +94,7 @@ namespace final.Controllers
             return RedirectToAction("GroupPage");
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult GroupPage()
         {
             ViewBag.Product = TempData["Product"];
@@ -101,22 +105,44 @@ namespace final.Controllers
             else
                 ViewBag.NewGroupCreatedRightNow = false;
 
-           return View();
-        }
-
-
-        //The group Page
-        public async Task<ActionResult> Group(string groupId)
-        {
-            ParseObject group = await model.retrieveGroup(groupId);
-            
-
-
+            TempData["ProductToGroup"] = TempData["Product"];
 
             return View();
         }
 
 
+
+        //The group Page
+        [Authorize]
+        public async Task<ActionResult> Group(string groupId)
+        {
+                            
+            if (groupId == null){
+                //ParseObject productParse = await model.retrieveProduct(product);
+                //groupId = await model
+            }
+
+            //will move to parse
+            ParseObject group = await model.retrieveGroup(groupId);
+            ParseObject productOfGroup = await model.retrieveProductOfGroup(group);
+            ViewBag.ProductName = productOfGroup.Get<string>(Constants.TITLE);
+
+
+            DateTime exp = group.Get<DateTime>(Constants.EXPIRATION_DATE);
+            ViewBag.ExpirationDate = exp;
+
+            return View();
+        }
+
+
+
+        public ActionResult JoinGroup()
+        {
+            var user = ParseUser.CurrentUser;
+
+
+            return View("Group");
+        }
 
 
 
