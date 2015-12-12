@@ -86,7 +86,7 @@ namespace final.Controllers
         //return a list of groups that the current business "won".
         public async System.Threading.Tasks.Task<ActionResult> MyActiveGroups()
         {
-            List<int> originalPrices = new List<int>(); //return value
+            List<double> originalPrices = new List<double>(); //return value
             List<string> comments = new List<string>(); //return value
             List<ParseObject> groups = new List<ParseObject>(); //return value
             List<int> users = new List<int>(); //return value
@@ -100,12 +100,12 @@ namespace final.Controllers
             {
                 ParseObject bid = await model.retrieveBidOfWinningBid(winningBid);
 
-                ParseObject businessOfBid = bid.Get<ParseObject>(Constants.BUSINESS);
+                string businessId = model.getBusinessIdOfBid(bid);
 
-                if (businessOfBid.ObjectId == myBusiness.ObjectId)
+                if (businessId == myBusiness.ObjectId)
                 {
-                    int originalPrice = bid.Get<int>(Constants.ORIGINAL_PRICE);
-                    string comment = bid.Get<string>(Constants.COMMENTS);
+                    double originalPrice = model.getBidOriginalPrice(bid);
+                    string comment = model.getCommentsOfBid(bid);
 
                     ParseObject group = await model.retrieveGroupOfBid(bid);
 
@@ -186,8 +186,14 @@ namespace final.Controllers
 
             ParseObject myBusiness = await model.retrieveMyBusiness();
 
-            await model.addProductToBusiness(selectedProduct, myBusiness.ObjectId);
-            return View("myProducts");
+            // await model.addProductToBusiness(selectedProduct, myBusiness.ObjectId);
+            // return View("myProducts");
+
+            ViewBag.product = await model.retrieveProduct(selectedProduct);
+
+            ViewBag.selectedProduct = selectedProduct;
+            ViewBag.myBusinessId = myBusiness.ObjectId;
+            return View();
         }
 
 

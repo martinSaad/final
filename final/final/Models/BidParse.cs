@@ -81,42 +81,51 @@ namespace final.Models
             }       
         }
 
-        public static double getPriceStep1(ParseObject bid)
+        public static double getBidPriceStep1(ParseObject bid)
         {
             return bid.Get<double>(Constants.PRICE_STEP_1);
         }
-        public static double getPriceStep2(ParseObject bid)
+        public static double getBidPriceStep2(ParseObject bid)
         {
             return bid.Get<double>(Constants.PRICE_STEP_2);
         }
-        public static double getPriceStep3(ParseObject bid)
+        public static double getBidPriceStep3(ParseObject bid)
         {
             return bid.Get<double>(Constants.PRICE_STEP_3);
         }
-        public static double getPriceStep4(ParseObject bid)
+        public static double getBidPriceStep4(ParseObject bid)
         {
             return bid.Get<double>(Constants.PRICE_STEP_4);
         }
-        public static double getPriceStep5(ParseObject bid)
+        public static double getBidPriceStep5(ParseObject bid)
         {
             return bid.Get<double>(Constants.PRICE_STEP_5);
         }
-        public static double getGuarantee(ParseObject bid)
+        public static double getBidGuarantee(ParseObject bid)
         {
             return bid.Get<double>(Constants.GUARANTEE);
         }
-        public static double getOriginalPrice(ParseObject bid)
+        public static double getBidOriginalPrice(ParseObject bid)
         {
             return bid.Get<double>(Constants.ORIGINAL_PRICE);
         }
-        public static double getMaxUints(ParseObject bid)
+        public static double getBidMaxUints(ParseObject bid)
         {
             return bid.Get<double>(Constants.MAX_UNITS);
         }
-        public static bool getShipping(ParseObject bid)
+        public static bool getBidShipping(ParseObject bid)
         {
             return bid.Get<bool>(Constants.SHIPPING);
 
+        }
+        public static string getBusinessIdOfBid(ParseObject bid)
+        {
+            ParseObject businessOfBid = bid.Get<ParseObject>(Constants.BUSINESS);
+            return businessOfBid.ObjectId;
+        }
+        public static string getCommentsOfBid(ParseObject bid)
+        {
+            return bid.Get<string>(Constants.COMMENTS);
         }
 
 

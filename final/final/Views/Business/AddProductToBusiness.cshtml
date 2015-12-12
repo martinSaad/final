@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "AddProductToBusiness";
+}
+
+<h2>AddProductToBusiness</h2>
+
+<script>
+
+    var businessId = '@(ViewBag.myBusinessId)';
+    var selectedProduct = '@(ViewBag.selectedProduct)';
+    var product = '@(ViewBag.product)';
+    var business = Parse.Object.extend("Business");
+    var query = new Parse.Query(business);
+    query.get(businessId, {
+        success: function (business) {
+            // The object was retrieved successfully.
+            var relation = business.relation("products");
+            relation.add(product);
+            business.save();
+        },
+        error: function (object, error) {
+            // The object was not retrieved successfully.
+            // error is a Parse.Error with an error code and message.
+        }
+    });
+
+
+
+</script>
+

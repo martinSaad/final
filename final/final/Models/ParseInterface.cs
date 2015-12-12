@@ -38,15 +38,17 @@ namespace final.Models
         Task<ParseObject> retrieveGroupOfBid(ParseObject bid);
         Task<bool> createBid(ParseObject business, string groupId, double maxUnits, double originalPrice, double priceStep1, double priceStep2, double priceStep3, double priceStep4, double priceStep5, string comments, double guarantee, bool shipping);
         Task<IEnumerable<ParseObject>> retrieveBids(string groupId);
-        double getPriceStep1(ParseObject bid);
-        double getPriceStep2(ParseObject bid);
-        double getPriceStep3(ParseObject bid);
-        double getPriceStep4(ParseObject bid);
-        double getPriceStep5(ParseObject bid);
-        double getGuarantee(ParseObject bid);
-        double getOriginalPrice(ParseObject bid);
-        double getMaxUints(ParseObject bid);
-        bool getShipping(ParseObject bid);
+        double getBidPriceStep1(ParseObject bid);
+        double getBidPriceStep2(ParseObject bid);
+        double getBidPriceStep3(ParseObject bid);
+        double getBidPriceStep4(ParseObject bid);
+        double getBidPriceStep5(ParseObject bid);
+        double getBidGuarantee(ParseObject bid);
+        double getBidOriginalPrice(ParseObject bid);
+        double getBidMaxUints(ParseObject bid);
+        bool getBidShipping(ParseObject bid);
+        string getBusinessIdOfBid(ParseObject bid);
+        string getCommentsOfBid(ParseObject bid);
 
 
 

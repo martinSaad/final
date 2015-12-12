@@ -81,7 +81,11 @@ namespace final.Models
         public const string MAX_UNITS = "max_units";
         public const string GUARANTEE = "guarantee";
         public const string SHIPPING = "shipping";
-
+        public const string SIZE_STEP_1 = "size_step_1";
+        public const string SIZE_STEP_2 = "size_step_2";
+        public const string SIZE_STEP_3 = "size_step_3";
+        public const string SIZE_STEP_4 = "size_step_4";
+        public const string SIZE_STEP_5 = "size_step_5";
 
         //product
         public const string TITLE = "title";

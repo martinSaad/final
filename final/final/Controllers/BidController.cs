@@ -25,6 +25,43 @@ namespace final.Controllers
             return View();
         }
 
+        /*
+        step sizes are calculeted as following:
+        - first step: 10% of max units
+        - second step: also 10% of max units
+        
+        - now we take the units left. if bigger than 15, we devide by 3 and split equally between steps 3,4,5.
+        if smaller than 15, we devide by 2 and split equally between steps 3,4.
+
+        step 5 is not mandatory.
+            
+        */
+        private int[] calculateStepSizes(int maxUints)
+        {
+            int unitsLeft = maxUints;
+            int[] result = new int[5];
+            //ceiling round's up the number
+            result[1] = (int)Math.Ceiling(maxUints * 0.1);
+            result[2] = result[1];
+
+            unitsLeft = unitsLeft - (result[1] + result[2]);
+            if (unitsLeft > 15)
+            {
+                int tmp = (int)Math.Ceiling((double)unitsLeft / 3);
+                result[3] = tmp;
+                result[4] = tmp;
+                result[5] = unitsLeft - result[3] - result[4];
+            }
+            else
+            {
+                int tmp = (int)Math.Ceiling((double)unitsLeft / 2);
+                result[3] = tmp;
+                result[4] = unitsLeft - result[3];
+            }
+
+            return result;
+        }
+
         private async System.Threading.Tasks.Task<ActionResult> CreateBid(FormCollection coll)
         {
             ParseObject myBusiness = await model.retrieveMyBusiness();
@@ -66,18 +103,18 @@ namespace final.Controllers
             double maxScore = 0;
             ParseObject bestBid = null;
 
-            double stepDifference;
-            double lowestPrice;
-            double startingPrice;
-            double deliveryCapability;
-            double shippingCapability;
-            double guaranteeCapability;
+            double stepDifference = 0;
+            double lowestPrice = 0;
+            double startingPrice = 0;
+            double deliveryCapability = 0;
+            double shippingCapability = 0;
+            double guaranteeCapability = 0;
 
             foreach (ParseObject bid in bids)
             {
                 //step difference calculation
-                double step2to3Difference = model.getPriceStep2(bid) - model.getPriceStep3(bid);
-                double step3to4Difference = model.getPriceStep3(bid) - model.getPriceStep4(bid);
+                double step2to3Difference = model.getBidPriceStep2(bid) - model.getBidPriceStep3(bid);
+                double step3to4Difference = model.getBidPriceStep3(bid) - model.getBidPriceStep4(bid);
                 if (step2to3Difference > step3to4Difference)
                     stepDifference = step2to3Difference * Constants.CALCULATION_STEPS_DIFFERENCE / 100;
                 else
@@ -86,24 +123,24 @@ namespace final.Controllers
                 //lowest price calculation
                 //not always there is a 5th step. if exsist - take it.
                 if (bid.Get<double>(Constants.PRICE_STEP_5) != 0)
-                    lowestPrice = model.getPriceStep5(bid) * Constants.CALCULATION_LOWEST_PRICE / 100;
+                    lowestPrice = model.getBidPriceStep5(bid) * Constants.CALCULATION_LOWEST_PRICE / 100;
                 else
-                    lowestPrice = model.getPriceStep4(bid) * Constants.CALCULATION_LOWEST_PRICE / 100;
+                    lowestPrice = model.getBidPriceStep4(bid) * Constants.CALCULATION_LOWEST_PRICE / 100;
 
                 //starting price calculation
-                startingPrice = model.getOriginalPrice(bid) * Constants.CALCULATION_STARTING_PRICE / 100;
+                startingPrice = model.getBidOriginalPrice(bid) * Constants.CALCULATION_STARTING_PRICE / 100;
 
                 //delivery capability calculation
-                deliveryCapability = model.getMaxUints(bid) * Constants.CALCULATION_DELIVERY_CAPABILITY / 100;
+                deliveryCapability = model.getBidMaxUints(bid) * Constants.CALCULATION_DELIVERY_CAPABILITY / 100;
 
                 //shipping capability calculation
-                if (model.getShipping(bid) == true)
+                if (model.getBidShipping(bid) == true)
                     shippingCapability = Constants.CALCULATION_SHIPPING_CAPABILITY;
                 else
                     shippingCapability = 0;
 
                 //guarantee capability calculation
-                guaranteeCapability = model.getGuarantee(bid) * Constants.CALCULATION_GUARANTEE_CAPABILITY / 100;
+                guaranteeCapability = model.getBidGuarantee(bid) * Constants.CALCULATION_GUARANTEE_CAPABILITY / 100;
 
                 //add review if necessary
 

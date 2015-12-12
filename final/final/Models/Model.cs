@@ -116,51 +116,60 @@ namespace final.Models
             return parseModel.retrieveBids(groupId);
         }
 
-        public double getPriceStep1(ParseObject bid)
+        public double getBidPriceStep1(ParseObject bid)
         {
-            return parseModel.getPriceStep1(bid);
+            return parseModel.getBidPriceStep1(bid);
         }
 
-        public double getPriceStep2(ParseObject bid)
+        public double getBidPriceStep2(ParseObject bid)
         {
-            return parseModel.getPriceStep2(bid);
+            return parseModel.getBidPriceStep2(bid);
         }
 
-        public double getPriceStep3(ParseObject bid)
+        public double getBidPriceStep3(ParseObject bid)
         {
-            return parseModel.getPriceStep3(bid);
+            return parseModel.getBidPriceStep3(bid);
         }
 
-        public double getPriceStep4(ParseObject bid)
+        public double getBidPriceStep4(ParseObject bid)
         {
-            return parseModel.getPriceStep4(bid);
+            return parseModel.getBidPriceStep4(bid);
         }
 
-        public double getPriceStep5(ParseObject bid)
+        public double getBidPriceStep5(ParseObject bid)
         {
-            return parseModel.getPriceStep5(bid);
+            return parseModel.getBidPriceStep5(bid);
         }
 
-        public double getGuarantee(ParseObject bid)
+        public double getBidGuarantee(ParseObject bid)
         {
-            return parseModel.getGuarantee(bid);
+            return parseModel.getBidGuarantee(bid);
         }
 
-        public double getOriginalPrice(ParseObject bid)
+        public double getBidOriginalPrice(ParseObject bid)
         {
-            return parseModel.getOriginalPrice(bid);
+            return parseModel.getBidOriginalPrice(bid);
         }
 
-        public double getMaxUints(ParseObject bid)
+        public double getBidMaxUints(ParseObject bid)
         {
-            return parseModel.getOriginalPrice(bid);
+            return parseModel.getBidOriginalPrice(bid);
         }
 
-        public bool getShipping(ParseObject bid)
+        public bool getBidShipping(ParseObject bid)
         {
-            return parseModel.getShipping(bid);
+            return parseModel.getBidShipping(bid);
         }
 
+        public string getBusinessIdOfBid(ParseObject bid)
+        {
+            return parseModel.getBusinessIdOfBid(bid);
+        }
+
+        public string getCommentsOfBid(ParseObject bid)
+        {
+            return parseModel.getCommentsOfBid(bid);
+        }
 
 
         //categories
