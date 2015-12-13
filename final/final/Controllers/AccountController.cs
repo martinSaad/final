@@ -79,19 +79,20 @@ namespace final.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             await ParseUser.LogInAsync(model.Email, model.Password);
             switch (result)
-              {
-                  case SignInStatus.Success:
-                      return RedirectToLocal(returnUrl);
-                  case SignInStatus.LockedOut:
-                      return View("Lockout");
-                  case SignInStatus.RequiresVerification:
-                      return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                  case SignInStatus.Failure:
-                  default:
-                      ModelState.AddModelError("", "Invalid login attempt.");
-                      return View(model);
-              }
-              
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+            }
+
+            return RedirectToLocal(returnUrl);
         }
 
         //
@@ -151,12 +152,9 @@ namespace final.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
-        {
+        { 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-
                 //ParseUser registration
 
                 var parseUser = new ParseUser()
@@ -171,6 +169,12 @@ namespace final.Controllers
                 parseUser[Models.Constants.IS_BUSINESS] = false;
 
                 await parseUser.SignUpAsync();
+
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+
+
 
                 if (result.Succeeded)
                 {
