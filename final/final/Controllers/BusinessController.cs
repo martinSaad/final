@@ -11,17 +11,22 @@ namespace final.Controllers
 {
     public class BusinessController : Controller
     {
-        readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         Model model = new Model();
 
 
         // GET: Business
         public ActionResult Dashboard()
         {
-
-            logger.Debug("Dashboard method is called");
-            logger.Error("error in logger");
-            return View();
+            ParseUser user = ParseUser.CurrentUser;
+            bool isBusiness = model.isBusiness(user);
+            if (isBusiness)
+            {
+                logger.Debug("Dashboard method is called");
+                logger.Error("error in logger");
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         //check if the difference between NOW and creation time of the group is under 24 horus
@@ -98,7 +103,7 @@ namespace final.Controllers
             //check if the winnign bid is my bid (from my business)
             foreach (ParseObject winningBid in winningBids)
             {
-                ParseObject bid = await model.retrieveBidOfWinningBid(winningBid);
+                ParseObject bid = await model.getBid(winningBid);
 
                 string businessId = model.getBusinessIdOfBid(bid);
 
@@ -186,14 +191,8 @@ namespace final.Controllers
 
             ParseObject myBusiness = await model.retrieveMyBusiness();
 
-            // await model.addProductToBusiness(selectedProduct, myBusiness.ObjectId);
-            // return View("myProducts");
-
-            ViewBag.product = await model.retrieveProduct(selectedProduct);
-
-            ViewBag.selectedProduct = selectedProduct;
-            ViewBag.myBusinessId = myBusiness.ObjectId;
-            return View();
+             await model.addProductToBusiness(selectedProduct, myBusiness.ObjectId);
+             return View("MyProducts");
         }
 
 

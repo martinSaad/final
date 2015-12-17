@@ -109,6 +109,12 @@ namespace final.Models
             return BidParse.retrieveBids(groupId);
         }
 
+        public Task<ParseObject> getBid(ParseObject winningBid)
+        {
+            return BidParse.getBid(winningBid);
+        }
+
+
         public double getBidPriceStep1(ParseObject bid)
         {
             return BidParse.getBidPriceStep1(bid);
@@ -186,6 +192,12 @@ namespace final.Models
         public string getSubCategoryName(ParseObject subCategory)
         {
             return SubCategoryParse.getSubCategoryName(subCategory);
+        }
+
+        //user
+        public bool isBusiness(ParseUser user)
+        {
+            return UserParse.isBusiness(user);
         }
     }
 }

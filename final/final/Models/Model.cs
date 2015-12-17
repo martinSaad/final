@@ -116,6 +116,10 @@ namespace final.Models
             return parseModel.retrieveBids(groupId);
         }
 
+        public Task<ParseObject> getBid(ParseObject bid)
+        {
+            return parseModel.getBid(bid);
+        }
         public double getBidPriceStep1(ParseObject bid)
         {
             return parseModel.getBidPriceStep1(bid);
@@ -192,9 +196,11 @@ namespace final.Models
         {
             return parseModel.getSubCategoryName(subCategory);
         }
-        public Task<ParseObject> retrieveActiveGroupForProduct(string productId)
+
+        //user
+        public bool isBusiness(ParseUser user)
         {
-            throw new NotImplementedException();
+            return parseModel.isBusiness(user);
         }
 
     }

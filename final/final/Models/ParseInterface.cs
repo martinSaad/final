@@ -42,6 +42,7 @@ namespace final.Models
         Task<ParseObject> retrieveGroupOfBid(ParseObject bid);
         Task<bool> createBid(ParseObject business, string groupId, double maxUnits, double originalPrice, double priceStep1, double priceStep2, double priceStep3, double priceStep4, double priceStep5, string comments, double guarantee, bool shipping);
         Task<IEnumerable<ParseObject>> retrieveBids(string groupId);
+        Task<ParseObject> getBid(ParseObject winningBid);
         double getBidPriceStep1(ParseObject bid);
         double getBidPriceStep2(ParseObject bid);
         double getBidPriceStep3(ParseObject bid);
@@ -63,6 +64,9 @@ namespace final.Models
         //subcategory
         Task<IEnumerable<ParseObject>> retrieveSubCategories();
         string getSubCategoryName(ParseObject subCategory);
+
+        //user
+        bool isBusiness(ParseUser user);
 
     }
 

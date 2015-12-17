@@ -9,7 +9,6 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
 using System.Net.Http;
-using RestSharp;
 
 namespace final.Models
 {
