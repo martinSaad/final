@@ -7,7 +7,14 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <!--[if lte IE 8]><script src="../../Content/js/ie/html5shiv.js"></script><![endif]-->
+    <noscript><link rel="stylesheet" href="../../Content/css/noscript.css" /></noscript>
+    <!--[if lte IE 8]><link rel="stylesheet" href="../../Content/css/ie8.css" /><![endif]-->
+    <!--[if lte IE 9]><link rel="stylesheet" href="../../Content/css/ie9.css" /><![endif]-->
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -32,13 +39,17 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
+    @Scripts.Render("~/bundles/js")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+   
     @RenderSection("scripts", required: false)
+
+
+    <!--<script src="../../Content/js/jquery.min.js"></script>-->
+    <!--[if lte IE 8]><script src="../../Content/js/ie/respond.min.js"></script><![endif]-->
+    
 </body>
 </html>

@@ -4,36 +4,100 @@
     int productNameIndex = 0;
 }
 
-<div class="jumbotron" style="direction:rtl;">
-    <h1>קבוצות פעילות</h1>
-    @foreach (var group in ViewBag.allActiveGroups)
-    {
-        <p>קבוצה פעילה למוצר: @Html.ActionLink(activeGroupsNames[productNameIndex], "Group" , "Group", new { groupId = group.ObjectId }, null) </p>
-        productNameIndex++;
-    }
+<div id="wrapper">
+
+    <div id="main">
+        <div id="reel">
+
+            <!-- Header Item -->
+
+            <div id="header" class="item" data-width="400">
+                <div class="inner">
+                    <h1>Parallelism</h1>
+                    <p>
+                        A responsive portfolio site<br />
+                        template by HTML5 UP
+                    </p>
+                </div>
+            </div>
+
+            <!-- Thumb Items -->
+
+            <article class="item thumb" data-width="282">
+                <h2>You really got me</h2>
+                <a href="images/fulls/01.jpg" class="image"><img src="../../Content/images/thumbs/01.jpg" alt=""></a>
+            </article>
+
+            <article class="item thumb" data-width="384">
+                <h2>Ad Infinitum</h2>
+                <a href="images/fulls/02.jpg" class="image"><img src="../../Content/images/thumbs/02.jpg" alt=""></a>
+            </article>
+
+            <article class="item thumb" data-width="274">
+                <h2>Different.</h2>
+                <a href="images/fulls/03.jpg" class="image"><img src="../Content/images/thumbs/03.jpg" alt=""></a>
+            </article>
+
+            <article class="item thumb" data-width="282">
+                <h2>Elysium</h2>
+                <a href="images/fulls/04.jpg" class="image"><img src="../Content/images/thumbs/04.jpg" alt=""></a>
+            </article>
+
+            <article class="item thumb" data-width="476">
+                <h2>Kingdom of the Wind</h2>
+                <a href="images/fulls/05.jpg" class="image"><img src="../Content/images/thumbs/05.jpg" alt=""></a>
+            </article>
+
+            <article class="item thumb" data-width="232">
+                <h2>The Pursuit</h2>
+                <a href="images/fulls/06.jpg" class="image"><img src="../Content/images/thumbs/06.jpg" alt=""></a>
+            </article>
+
+            <article class="item thumb" data-width="352">
+                <h2>Boundless</h2>
+                <a href="images/fulls/07.jpg" class="image"><img src="../Content/images/thumbs/07.jpg" alt=""></a>
+            </article>
+
+            <article class="item thumb" data-width="348">
+                <h2>The Spectators</h2>
+                <a href="images/fulls/08.jpg" class="image"><img src="../Content/images/thumbs/08.jpg" alt=""></a>
+            </article>
+
+            <!-- Filler Thumb Items (just for demonstration purposes) -->
+            <article class="item thumb" data-width="476"><h2>Kingdom of the Wind</h2><a href="../Content/images/fulls/05.jpg" class="image"><img src="../../Content/images/thumbs/05.jpg" alt=""></a></article>
+            <article class="item thumb" data-width="232"><h2>The Pursuit</h2><a href="../Content/images/fulls/06.jpg" class="image"><img src="../../Content/images/thumbs/06.jpg" alt=""></a></article>
+            <article class="item thumb" data-width="352"><h2>Boundless</h2><a href="../Content/images/fulls/07.jpg" class="image"><img src="../../Content/images/thumbs/07.jpg" alt=""></a></article>
+            <article class="item thumb" data-width="348"><h2>The Spectators</h2><a href="../Content/images/fulls/08.jpg" class="image"><img src="../../Content/images/thumbs/08.jpg" alt=""></a></article>
+            <article class="item thumb" data-width="282"><h2>You really got me</h2><a href="../Content/images/fulls/01.jpg" class="image"><img src="../../Content/images/thumbs/01.jpg" alt=""></a></article>
+            <article class="item thumb" data-width="384"><h2>Ad Infinitum</h2><a href="../Content/images/fulls/02.jpg" class="image"><img src="../../Content/images/thumbs/02.jpg" alt=""></a></article>
+            <article class="item thumb" data-width="274"><h2>Different.</h2><a href="../Content/images/fulls/03.jpg" class="image"><img src="../../Content/images/thumbs/03.jpg" alt=""></a></article>
+            <article class="item thumb" data-width="282"><h2>Elysium</h2><a href="../Content/images/fulls/04.jpg" class="image"><img src="../../Content/images/thumbs/04.jpg" alt=""></a></article>
+
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="left">
+            <p>
+                This is <strong>Parallelism</strong>, a responsive portfolio site template by <a href="http://html5up.net">HTML5 UP</a>. Free for personal<br />
+                and commercial use under the <a href="http://html5up.net/license">Creative Commons Attribution</a> license.
+            </p>
+        </div>
+        <div class="right">
+            <ul class="contact">
+                <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                <li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+                <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Untitled</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </div>
+
 </div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2><a href="@Url.Action("CreateGroup","Group")">פתיחת קבוצה חדשה</a></h2>
-    </div>
-</div>
-
-
-
-
 
