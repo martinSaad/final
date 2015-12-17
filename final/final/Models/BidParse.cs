@@ -81,6 +81,22 @@ namespace final.Models
             }       
         }
 
+        public static async Task<ParseObject> getBid(ParseObject winningBid)
+        {
+            try
+            {
+                var bidQuery = ParseObject.GetQuery(Constants.BID_TABLE).WhereEqualTo(Constants.OBJECT_ID, winningBid.Get<ParseObject>(Constants.BID).ObjectId);
+                ParseObject bid = await bidQuery.FirstAsync();
+
+                return bid;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
+
         public static double getBidPriceStep1(ParseObject bid)
         {
             return bid.Get<double>(Constants.PRICE_STEP_1);

@@ -26,10 +26,12 @@ namespace final.Models
 
         public static async Task<ParseObject> retrieveBidOfWinningBid(ParseObject winningBid)
         {
+            Model model = new Model();
             try
             {
-                var bidQuery = ParseObject.GetQuery(Constants.BID_TABLE).WhereEqualTo(Constants.OBJECT_ID, winningBid.ObjectId);
-                ParseObject bid = await bidQuery.FirstAsync();
+                ParseObject bid = await model.getBid(winningBid);
+                var bidQuery = ParseObject.GetQuery(Constants.BID_TABLE).WhereEqualTo(Constants.OBJECT_ID, bid.ObjectId);
+                //ParseObject bid = await bidQuery.FirstAsync();
 
                 return bid;
             }
