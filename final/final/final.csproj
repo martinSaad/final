@@ -219,12 +219,34 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\ie8.css" />
+    <Content Include="Content\css\ie9.css" />
+    <Content Include="Content\css\images\loader.gif" />
+    <Content Include="Content\css\images\overlay.png" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\noscript.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\js\ie\backgroundsize.min.htc" />
+    <Content Include="Content\js\ie\html5shiv.js" />
+    <Content Include="Content\js\ie\respond.min.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\jquery.poptrox.min.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\skel-viewport.min.js" />
+    <Content Include="Content\js\skel.min.js" />
+    <Content Include="Content\js\util.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -286,6 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\" />
     <Folder Include="Views\Parse\" />
   </ItemGroup>
   <ItemGroup>
