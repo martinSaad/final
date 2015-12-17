@@ -56,6 +56,11 @@ namespace final.Models
         {
             return parseModel.getProductTitle(product);
         }
+        public ParseFile getProductImage(ParseObject product)
+        {
+            return parseModel.getProductImage(product);
+        }
+
 
 
         //group

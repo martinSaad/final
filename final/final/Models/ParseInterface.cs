@@ -21,6 +21,7 @@ namespace final.Models
         Task<IEnumerable<ParseObject>> retrieveAllMyPoducts(string businessId);
         string getProductTitle(ParseObject product);
         //Task<ParseObject> retrieveActiveGroupForProduct(string productId);
+        ParseFile getProductImage(ParseObject product);
 
 
 

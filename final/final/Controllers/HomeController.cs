@@ -16,10 +16,13 @@ namespace final.Controllers
             List<ParseObject> groups = new List<ParseObject>(); //return value
             IEnumerable<ParseObject> allActiveGroups = await model.retrieveAllActiveGroups();
             List<string> allActiveGroupsNames = new List<string>();
+            List<string> productImages = new List<string>();
             foreach (ParseObject group in allActiveGroups)
             {
                 ParseObject productOfGroup = group.Get<ParseObject>(Constants.PRODUCT);
                 ParseObject product = await model.retrieveProduct(productOfGroup.ObjectId);
+                ParseFile file = model.getProductImage(product);
+                productImages.Add(file.Url.ToString());
                 allActiveGroupsNames.Add(product.Get<string>(Constants.TITLE));
             }    
             
@@ -27,6 +30,7 @@ namespace final.Controllers
             //ViewBag.groupsNames = groupsNames;
             ViewBag.allActiveGroups = allActiveGroups;
             ViewBag.allActiveGroupsNames = allActiveGroupsNames;
+            ViewBag.productImages = productImages;
             return View();
         }
 

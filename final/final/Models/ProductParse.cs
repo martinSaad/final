@@ -82,5 +82,11 @@ namespace final.Models
         {
             return product.Get<string>(Constants.TITLE);
         }
+
+        public static ParseFile getProductImage(ParseObject product)
+        {
+            return product.Get<ParseFile>(Constants.IMAGE);
+        }
+
     }
 }
