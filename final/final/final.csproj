@@ -249,6 +249,7 @@
     <Content Include="Content\js\ie\html5shiv.js" />
     <Content Include="Content\js\ie\respond.min.js" />
     <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Scripts\js\jquery.min.js" />
     <Content Include="Scripts\js\jquery.poptrox.min.js" />
     <Content Include="Scripts\js\main.js" />
     <Content Include="Scripts\js\skel-viewport.min.js" />
