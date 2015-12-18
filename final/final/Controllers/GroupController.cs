@@ -1,5 +1,6 @@
 ﻿using final.Models;
 using Parse;
+using ScheduledTaskExample.ScheduledTasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,8 +79,11 @@ namespace final.Controllers
             if (!AlreadyHaveActiveGroupForThisProduct){
                 ParseObject product = await model.retrieveProduct(selectedProduct);
                 await model.createGroup(product);
-                
-                
+
+                //start Quartz - runs a scheduler to select wiinng bid in X hours
+                startSchedulers(selectedProduct);
+
+
                 //pass parameters to the GroupPage Action Result (because this function is in the middle)
                 TempData["NewGroupCreated"] = product;    
             }
@@ -92,6 +96,24 @@ namespace final.Controllers
 
 
             return RedirectToAction("GroupPage");
+        }
+
+        private async void startSchedulers(string selectedProduct)
+        {
+            //winning bid scheduler
+            ParseObject group = await model.retrieveActiveGroupForProduct(selectedProduct);
+            DateTime openingTime = (DateTime)group.CreatedAt;
+            WinningBidJob.Start(group.ObjectId, openingTime);
+
+            //deactivate group scheduler
+            DateTime expirationDate = model.getExpirationDate(group);
+            DeactivateGroupJob.Start(group.ObjectId, expirationDate);
+        }
+
+        public async void deactivateGroup(string groupId)
+        {
+            ParseObject group = await model.retrieveGroup(groupId);
+            await model.setGroupActive(group, false);
         }
 
         [Authorize]

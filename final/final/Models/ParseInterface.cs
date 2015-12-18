@@ -20,7 +20,7 @@ namespace final.Models
         Task<ParseObject> retrieveProduct(string productID);
         Task<IEnumerable<ParseObject>> retrieveAllMyPoducts(string businessId);
         string getProductTitle(ParseObject product);
-        //Task<ParseObject> retrieveActiveGroupForProduct(string productId);
+        Task<ParseObject> retrieveActiveGroupForProduct(string productId);
         ParseFile getProductImage(ParseObject product);
 
 
@@ -32,6 +32,8 @@ namespace final.Models
         Task<ParseObject> retrieveProductOfGroup(ParseObject group);
         Task<ParseObject> retrieveGroup(string groupId);
         Task<bool> createGroup(ParseObject product);
+        DateTime getExpirationDate(ParseObject group);
+        Task<bool> setGroupActive(ParseObject group, bool status);
 
 
         //winning bid

@@ -69,6 +69,8 @@ namespace final.Models
         {
             try
             {
+                Model model = new Model();
+                ParseObject group = await model.retrieveGroup(groupId);
                 var bidsQuery = ParseObject.GetQuery(Constants.BID_TABLE).WhereEqualTo(Constants.GROUP_BUYING, groupId);
                 IEnumerable<ParseObject> bids = await bidsQuery.FindAsync();
 

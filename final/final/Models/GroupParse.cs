@@ -100,6 +100,18 @@ namespace final.Models
                 throw e;
             }
         }
+        public static DateTime getExpirationDate(ParseObject group)
+        {
+            return group.Get<DateTime>(Constants.EXPIRATION_DATE);
+        }
+
+        public static async Task<bool> setGroupActive(ParseObject group, bool status)
+        {
+            group[Constants.ACTIVE] = status;
+            await group.SaveAsync();
+            return true;
+        }
+
 
     }
 }

@@ -83,6 +83,11 @@ namespace final.Controllers
             return View();
         }
 
+        public async void winningBidSelector(string groupId)
+        {
+            await selectWinningBid(groupId);
+        }
+
 
         /*
         winning bid is determined by several parameters:
@@ -96,7 +101,7 @@ namespace final.Controllers
 
         Each parameter is weighted with a certain percentage - specified in Constants class
         */
-        private async System.Threading.Tasks.Task<ParseObject> selectWinningBid(string groupId)
+        private async System.Threading.Tasks.Task<bool> selectWinningBid(string groupId)
         {
             IEnumerable<ParseObject> bids = await model.retrieveBids(groupId);
 
@@ -153,8 +158,16 @@ namespace final.Controllers
                 }                   
              }
 
-            await model.createWinningBid(bestBid);
-            return null;
+            try
+            {
+                await model.createWinningBid(bestBid);
+                return true;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
         }
     }
 }

@@ -52,6 +52,11 @@ namespace final.Models
         {
             return parseModel.retrieveAllMyPoducts(businessId);
         }
+        public Task<ParseObject> retrieveActiveGroupForProduct(string productID)
+        {
+            return parseModel.retrieveActiveGroupForProduct(productID);
+        }
+
         public string getProductTitle(ParseObject product)
         {
             return parseModel.getProductTitle(product);
@@ -88,6 +93,16 @@ namespace final.Models
         {
             return parseModel.retrieveGroup(groupId);
         }
+        public DateTime getExpirationDate(ParseObject group)
+        {
+            return parseModel.getExpirationDate(group);
+        }
+        public Task<bool> setGroupActive(ParseObject group, bool status)
+        {
+            return parseModel.setGroupActive(group, status);
+        }
+
+
 
 
         //winning bid
@@ -162,7 +177,7 @@ namespace final.Models
 
         public double getBidMaxUints(ParseObject bid)
         {
-            return parseModel.getBidOriginalPrice(bid);
+            return parseModel.getBidMaxUints(bid);
         }
 
         public bool getBidShipping(ParseObject bid)

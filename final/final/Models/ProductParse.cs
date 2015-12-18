@@ -78,6 +78,25 @@ namespace final.Models
             }
         }
 
+        public static async Task<ParseObject> retrieveActiveGroupForProduct(string productID)
+        {
+            try
+            {
+                ParseObject product = await retrieveProduct(productID);
+                var productQuery = ParseObject.GetQuery(Constants.GROUP_BUYING_TABLE).WhereEqualTo(Constants.PRODUCT, product).WhereEqualTo(Constants.ACTIVE, true);
+                ParseObject group = await productQuery.FirstAsync();
+
+
+                return group;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
+
+
         public static string getProductTitle(ParseObject product)
         {
             return product.Get<string>(Constants.TITLE);
