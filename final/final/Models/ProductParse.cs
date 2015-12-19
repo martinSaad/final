@@ -127,5 +127,26 @@ namespace final.Models
                 throw e;
             }
         }
+
+        public static async Task<bool> removeBusinessFromProduct(string productId, ParseObject business)
+        {
+            try
+            {
+                //get product
+                Model model = new Model();
+                ParseObject product = await model.retrieveProduct(productId);
+
+                var relation = product.GetRelation<ParseObject>(Constants.BUSINESS);
+                relation.Remove(business);
+                await product.SaveAsync();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
     }
 }

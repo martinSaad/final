@@ -25,6 +25,10 @@ namespace final.Models
             return BusinessParse.addProductToBusiness(productId, business);
         }
 
+        public Task<bool> removeProductFromBusiness(string productId, ParseObject business)
+        {
+            return BusinessParse.removeProductFromBusiness(productId, business);
+        }
 
 
         //product
@@ -61,6 +65,10 @@ namespace final.Models
         {
             return ProductParse.addBusinessToProduct(productId, business);
 
+        }
+        public Task<bool> removeBusinessFromProduct(string productId, ParseObject business)
+        {
+            return ProductParse.removeBusinessFromProduct(productId, business);
         }
 
 

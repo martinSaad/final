@@ -13,6 +13,8 @@ namespace final.Models
         Task<ParseObject> retrieveMyBusiness();
         Task<ParseObject> retrieveBusiness(string businessId);
         Task<bool> addProductToBusiness(string productId, ParseObject business);
+        Task<bool> removeProductFromBusiness(string productId, ParseObject business);
+
 
         //product
         Task<IEnumerable<ParseObject>> businessesWhoHaveThisProduct(ParseObject product);
@@ -23,6 +25,8 @@ namespace final.Models
         Task<ParseObject> retrieveActiveGroupForProduct(string productId);
         ParseFile getProductImage(ParseObject product);
         Task<bool> addBusinessToProduct(string productId, ParseObject business);
+        Task<bool> removeBusinessFromProduct(string productId, ParseObject business);
+
 
 
 

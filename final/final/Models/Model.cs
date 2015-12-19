@@ -33,6 +33,11 @@ namespace final.Models
             return parseModel.addProductToBusiness(productId, business);
         }
 
+        public Task<bool> removeProductFromBusiness(string productId, ParseObject business)
+        {
+            return parseModel.removeProductFromBusiness(productId, business);
+        }
+
         //product
         public Task<IEnumerable<ParseObject>> businessesWhoHaveThisProduct(ParseObject product)
         {
@@ -69,7 +74,10 @@ namespace final.Models
         {
             return parseModel.addBusinessToProduct(productId, business);
         }
-
+        public Task<bool> removeBusinessFromProduct(string productId, ParseObject business)
+        {
+            return parseModel.removeBusinessFromProduct(productId, business);
+        }
 
 
         //group

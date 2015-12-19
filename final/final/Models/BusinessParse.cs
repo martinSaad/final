@@ -60,5 +60,26 @@ namespace final.Models
                 throw e;
             }
         }
+
+        public static async Task<bool> removeProductFromBusiness(string productId, ParseObject business)
+        {
+            try
+            {
+                //get product
+                Model model = new Model();
+                ParseObject product = await model.retrieveProduct(productId);
+
+                var relation = business.GetRelation<ParseObject>(Constants.PRODUCTS);
+                relation.Remove(product);
+                await business.SaveAsync();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
     }
 }
