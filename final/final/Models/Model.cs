@@ -28,9 +28,9 @@ namespace final.Models
             return parseModel.retrieveBusiness(businessId);
         }
 
-        public Task<bool> addProductToBusiness(string productId, string businessId)
+        public Task<bool> addProductToBusiness(string productId, ParseObject business)
         {
-            return parseModel.addProductToBusiness(productId, businessId);
+            return parseModel.addProductToBusiness(productId, business);
         }
 
         //product
@@ -64,6 +64,10 @@ namespace final.Models
         public ParseFile getProductImage(ParseObject product)
         {
             return parseModel.getProductImage(product);
+        }
+        public Task<bool> addBusinessToProduct(string productId, ParseObject business)
+        {
+            return parseModel.addBusinessToProduct(productId, business);
         }
 
 

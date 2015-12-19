@@ -222,7 +222,6 @@
     <Compile Include="Models\ParseModel.cs" />
     <Compile Include="Models\ParseInterface.cs" />
     <Compile Include="Models\ProductParse.cs" />
-    <Compile Include="Models\PutRequest.cs" />
     <Compile Include="Models\SchedulerJobs.cs" />
     <Compile Include="Models\SubCategoryParse.cs" />
     <Compile Include="Models\UserParse.cs" />

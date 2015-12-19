@@ -107,5 +107,25 @@ namespace final.Models
             return product.Get<ParseFile>(Constants.IMAGE);
         }
 
+        public static async Task<bool> addBusinessToProduct(string productId, ParseObject business)
+        {
+            try
+            {
+                //get product
+                Model model = new Model();
+                ParseObject product = await model.retrieveProduct(productId);
+
+                var relation = product.GetRelation<ParseObject>(Constants.BUSINESS);
+                relation.Add(business);
+                await product.SaveAsync();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                //add log
+                throw e;
+            }
+        }
     }
 }

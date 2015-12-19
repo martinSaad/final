@@ -40,14 +40,18 @@ namespace final.Models
             }
         }
 
-        public static async Task<bool> addProductToBusiness(string productId, string businessId)
+        public static async Task<bool> addProductToBusiness(string productId, ParseObject business)
         {
             try
             {
-               // ParseObject business = await retrieveBusiness(businessId);
+                //get product
+                Model model = new Model();
+                ParseObject product = await model.retrieveProduct(productId);
 
-                //TODO: REST API
-                PutRequest.makeRequest(Constants.BUSINESS_TABLE, businessId, "_User", Constants.PRODUCT_TABLE, productId);
+                var relation = business.GetRelation<ParseObject>(Constants.PRODUCTS);
+                relation.Add(product);
+                await business.SaveAsync();
+
                 return true; 
             }
             catch (Exception e)

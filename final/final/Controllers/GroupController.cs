@@ -80,7 +80,7 @@ namespace final.Controllers
                 ParseObject product = await model.retrieveProduct(selectedProduct);
                 await model.createGroup(product);
 
-                //start Quartz - runs a scheduler to select wiinng bid in X hours
+                //winning bid scheduler and deactivating group scheduler 
                 startSchedulers(selectedProduct);
 
 

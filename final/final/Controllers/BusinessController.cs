@@ -22,8 +22,6 @@ namespace final.Controllers
             bool isBusiness = model.isBusiness(user);
             if (isBusiness)
             {
-                logger.Debug("Dashboard method is called");
-                logger.Error("error in logger");
                 return View();
             }
             return RedirectToAction("Index", "Home");
@@ -191,8 +189,11 @@ namespace final.Controllers
 
             ParseObject myBusiness = await model.retrieveMyBusiness();
 
-             await model.addProductToBusiness(selectedProduct, myBusiness.ObjectId);
-             return View("MyProducts");
+            await model.addProductToBusiness(selectedProduct, myBusiness);
+            await model.addBusinessToProduct(selectedProduct, myBusiness);
+
+            //TODO return myproducts list - below is not working
+            return await MyProducts();
         }
 
 
