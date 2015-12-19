@@ -213,7 +213,7 @@ var parallelism = (function($) { var _ = {
 
 							if (_.settings.centerVertically)
 								_.objects.main
-									.css('top', '50%')
+									.css('top', '55%')
 									.css('margin-top', (-1 * (_.objects.main.outerHeight() / 2)) + _.settings.verticalNudge);
 
 						// Resize/reposition SZs.
