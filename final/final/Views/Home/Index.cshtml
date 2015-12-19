@@ -2,6 +2,7 @@
     ViewBag.Title = "Home Page";
     List<string> activeGroupsNames = ViewBag.allActiveGroupsNames;
     int productNameIndex = 0;
+    List<string> activeGroupsProductImages = ViewBag.productImages;
 }
 
 <div id="wrapper">
@@ -13,10 +14,10 @@
 
             <div id="header" class="item" data-width="400">
                 <div class="inner">
-                    <h1>Parallelism</h1>
+                    <h1>פתיחת קבוצה</h1>
                     <p>
-                        A responsive portfolio site<br />
-                        template by HTML5 UP
+                        קנה את המוצר שאתה רוצה,<br />
+                       בזול!
                     </p>
                 </div>
             </div>
@@ -24,8 +25,8 @@
             <!-- Thumb Items -->
 
             <article class="item thumb" data-width="282">
-                <h2>You really got me</h2>
-                <a href="images/fulls/01.jpg" class="image"><img src="../../Content/images/thumbs/01.jpg" alt=""></a>
+                <h2>@activeGroupsNames[productNameIndex]</h2>
+                <a href="images/fulls/01.jpg" class="image"><img src="@activeGroupsProductImages[productNameIndex]" alt=""></a>
             </article>
 
             <article class="item thumb" data-width="384">
@@ -77,13 +78,13 @@
     </div>
 
     <div id="footer">
-        <div class="left">
+        <div class="right">
             <p>
                 This is <strong>Parallelism</strong>, a responsive portfolio site template by <a href="http://html5up.net">HTML5 UP</a>. Free for personal<br />
                 and commercial use under the <a href="http://html5up.net/license">Creative Commons Attribution</a> license.
             </p>
         </div>
-        <div class="right">
+        <div class="left">
             <ul class="contact">
                 <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
                 <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
@@ -93,7 +94,6 @@
                 <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
             </ul>
             <ul class="copyright">
-                <li>&copy; Untitled</li>
                 <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
             </ul>
         </div>

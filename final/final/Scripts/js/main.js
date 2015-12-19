@@ -391,7 +391,7 @@ var parallelism = (function($) { var _ = {
 
 						if (_.settings.resetScroll)
 							window.setTimeout(function() {
-								_.objects.main.scrollLeft(0);
+								//_.objects.main.scrollLeft(0);
 							}, 0);
 
 					// Scroll Zones.

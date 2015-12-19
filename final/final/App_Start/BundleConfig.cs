@@ -11,14 +11,7 @@ namespace final
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/js").Include(
-                        "~/Scripts/js/jquery.poptrox.min.js",
-                        "~/Scripts/js/skel-viewport.min.js",
-                        "~/Scripts/js/jquery.min.js",
-                        "~/Scripts/js/skel.min.js",
-                        "~/Scripts/js/util.js",
-                        "~/Scripts/js/main.js"));
-
+            
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -37,7 +30,14 @@ namespace final
                       "~/Content/site.css",
                       "~/Content/css/main.css"));
 
-            
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
+                        "~/Scripts/js/jquery.min.js",
+                        "~/Scripts/js/jquery.poptrox.min.js",
+                        "~/Scripts/js/skel.min.js",
+                        "~/Scripts/js/skel-viewport.min.js",
+                        "~/Scripts/js/util.js",
+                        "~/Scripts/js/main.js"));
+
         }
     }
 }
