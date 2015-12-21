@@ -91,8 +91,6 @@ namespace final.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
-
-            return RedirectToLocal(returnUrl);
         }
 
         //
@@ -146,32 +144,53 @@ namespace final.Controllers
             return View();
         }
 
+        private ParseUser newParseUser(string email, string password, string firstName, string lastName)
+        {
+            var parseUser = new ParseUser()
+            {
+                Username = email,
+                Password = password,
+                Email = email
+            };
+            parseUser[Models.Constants.FIRST_NAME] = firstName;
+            parseUser[Models.Constants.LAST_NAME] = lastName;
+            parseUser[Models.Constants.IS_CLIENT] = true;
+            parseUser[Models.Constants.IS_BUSINESS] = false;
+
+            return parseUser;
+        }
+
         //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
-        { 
+        {
             if (ModelState.IsValid)
             {
-                //ParseUser registration
-
-                var parseUser = new ParseUser()
-                {
-                    Username = model.Email,
-                    Password = model.Password,
-                    Email = model.Email
+                var user = new ApplicationUser {
+                    UserName = model.Email, Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    LivingCity = model.LivingCity
                 };
-                parseUser[Models.Constants.FIRST_NAME] = model.FirstName;
-                parseUser[Models.Constants.LAST_NAME] = model.LastName;
-                parseUser[Models.Constants.IS_CLIENT] = true;
-                parseUser[Models.Constants.IS_BUSINESS] = false;
 
-                await parseUser.SignUpAsync();
+                //ParseUser registration
+                ParseUser parseUser = newParseUser(model.Email, model.Password, model.FirstName, model.LastName);
+
+                try
+                {
+                    await parseUser.SignUpAsync();
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                catch (Exception e)
+                {
+                    //add log
+                    throw e;
+                }
 
 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
 
@@ -390,7 +409,14 @@ namespace final.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                string[] names = info.ExternalIdentity.Name.Split(' ');
+                var user = new ApplicationUser {
+                    UserName = model.Email, Email = model.Email,
+                    FirstName = names[0],
+                    LastName = names[1],
+                    LivingCity = model.LivingCity
+                };
+                //ParseUser parseUser = newParseUser(model.Email, model.Password, model.FirstName, model.LastName);
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

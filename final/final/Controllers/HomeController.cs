@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace final.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         Model model = new Model();

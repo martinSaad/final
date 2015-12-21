@@ -54,15 +54,13 @@ namespace final
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+                appId: "1513033632350091",
+                appSecret: "4a401c9cc7dc17e08422062f5a17a2b0");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(
+                clientId: "226630951438-qjoc05sto9te8oqtdp0ujgp9nglrgb2s.apps.googleusercontent.com",
+                clientSecret: "0Z1aH5WZONIUhX3uk_vTIlM4");
         }
     }
 }
